@@ -62,26 +62,27 @@
   :config
   (add-hook 'after-change-major-mode-hook 'linum-mode))
 
-;;(use-package auto-complete
-;;  :ensure t
-;;  :demand auto-complete
-;;  :init
-;;  (ac-config-default)
-;;  (require 'auto-complete-config)
-;;  :config
-;;  (define-key ac-complete-mode-map (kbd "C-n") 'ac-expand)
-;;  (define-key ac-menu-map (kbd "C-b") 'ac-previous)
-;;  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
-(use-package ac-helm
-  :ensure t)
 (use-package auto-complete
   :ensure t
-  :demand ac-helm
+  :demand auto-complete
   :init
   (ac-config-default)
+  (require 'auto-complete-config)
   :config
-  (global-set-key (kbd "C-n") 'ac-complete-with-helm)
-  (define-key ac-complete-mode-map (kbd "C-n") 'ac-complete-with-helm))
+  (define-key ac-complete-mode-map (kbd "C-n") 'ac-expand)
+  (define-key ac-menu-map (kbd "C-b") 'ac-previous)
+  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
+(use-package ac-helm
+  :ensure t)
+
+;; (use-package auto-complete
+;;   :ensure t
+;;   :demand ac-helm
+;;   :init
+;;   (ac-config-default)
+;;   :config
+;;   (global-set-key (kbd "C-n") 'ac-complete-with-helm)
+;;   (define-key ac-complete-mode-map (kbd "C-n") 'ac-complete-with-helm))
 
 (use-package jedi
   :ensure t
@@ -264,7 +265,11 @@
     (evil-set-initial-state 'magit-log-mode 'normal)
     (evil-define-key 'normal magit-mode-map
       "j" 'magit-goto-next-section
-      "k" 'magit-goto-previous-section)
+      "k" 'magit-goto-previous-section
+      "c" 'magit-commit
+      "-" 'magit-stage-item
+      "p" 'magit-toggle-section
+      "P" 'magit-push)
     (evil-define-key 'normal magit-log-mode-map
       "j" 'magit-goto-next-section
       "k" 'magit-goto-previous-section)
