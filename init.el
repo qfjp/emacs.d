@@ -8,6 +8,11 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+(setq inhibit-splash-screen t)
+
+;; spaces not tabs
+(setq-default indent-tabs-mode nil)
+
 ;; disable backup and autosave
 (setq backup-inhibited t)
 (setq auto-save-default nil)
