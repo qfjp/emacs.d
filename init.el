@@ -3,12 +3,20 @@
 
 ;;; Code:
 
+;; disable menubar, toolbar, and scrollbars
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
 ;; disable backup and autosave
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+;; Emacs evil will use c-u to scroll
+(setq evil-want-C-u-scroll t)
+
 ;; disable search auto-wrap
-(setq isearch-wrap-function '(lambda nil))
+;;(setq isearch-wrap-function '(lambda nil))
 
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
@@ -106,23 +114,6 @@
        (evil-define-key 'normal dired-mode-map "q"
 	 'kill-this-buffer))))
 
-(use-package evil
-  :commands (evil)
-  :ensure t
-  :demand evil
-  :init (setq evil-want-C-u-scroll t)
-  :config
-  (progn
-    (define-key evil-normal-state-map (kbd "gh") 'help-command)
-    (define-key key-translation-map (kbd "gx") (kbd "C-x"))
-    (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-    (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-    (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-    (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-    (define-key evil-normal-state-map (kbd "; w ;") 'save-buffer)
-    (my-dired-evil-keymaps)
-    (my-package-list-evil-keymaps)
-    (my-ibuffer-evil-keymaps)))
 
 (use-package key-chord
   :ensure t
@@ -216,6 +207,7 @@
  (use-package magit
    :ensure t
    :demand magit
+   :demand evil
    :config
    (progn
      (setq magit-auto-revert-mode nil)
@@ -234,6 +226,24 @@
        "j" 'magit-goto-next-section
        "k" 'magit-goto-previous-section)))
 
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :commands (evil)
+  :demand evil
+  :config
+  (progn
+    (define-key evil-normal-state-map (kbd "gh") 'help-command)
+    (define-key key-translation-map (kbd "gx") (kbd "C-x"))
+    (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+    (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+    (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+    (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+    (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+    (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
+    (my-dired-evil-keymaps)
+    (my-package-list-evil-keymaps)
+    (my-ibuffer-evil-keymaps)
+    (evil-mode 1)))
+
 (provide 'init)
 ;;; init.el ends here
