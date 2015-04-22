@@ -8,6 +8,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; Minibuffer persistent history
+(savehist-mode 1)
+
+;; disable start screen
 (setq inhibit-splash-screen t)
 
 ;; spaces not tabs
