@@ -38,22 +38,50 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(defun my-ido-evil-keymaps ()
+  "Keymaps for ido in evil mode."
+  (progn
+    (define-key ido-completion-map (kbd "l") 'ido-next-match)
+    (define-key ido-completion-map (kbd "h") 'ido-prev-match)))
+(use-package ido
+  :demand evil
+  :init (ido-mode t)
+  :config
+  (add-hook 'ido-minibuffer-setup-hook
+            'my-ido-evil-keymaps)
+  )
+
+(use-package helm
+  :ensure t
+  :config
+  (global-set-key (kbd "M-x") 'helm-M-x))
+
 (use-package linum-relative
   :ensure t
   :demand linum-relative
   :config
   (add-hook 'after-change-major-mode-hook 'linum-mode))
 
+;;(use-package auto-complete
+;;  :ensure t
+;;  :demand auto-complete
+;;  :init
+;;  (ac-config-default)
+;;  (require 'auto-complete-config)
+;;  :config
+;;  (define-key ac-complete-mode-map (kbd "C-n") 'ac-expand)
+;;  (define-key ac-menu-map (kbd "C-b") 'ac-previous)
+;;  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
+(use-package ac-helm
+  :ensure t)
 (use-package auto-complete
   :ensure t
-  :demand auto-complete
+  :demand ac-helm
   :init
   (ac-config-default)
-  (require 'auto-complete-config)
   :config
-  (define-key ac-complete-mode-map (kbd "C-n") 'ac-expand)
-  (define-key ac-menu-map (kbd "C-b") 'ac-previous)
-  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
+  (global-set-key (kbd "C-n") 'ac-complete-with-helm)
+  (define-key ac-complete-mode-map (kbd "C-n") 'ac-complete-with-helm))
 
 (use-package jedi
   :ensure t
@@ -146,7 +174,8 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "w" 'save-buffer)
     (evil-leader/set-key "q" 'kill-buffer-and-window)
-    (evil-leader/set-key "b" 'ibuffer)))
+    (evil-leader/set-key "b" 'ido-switch-buffer)
+    ))
 
 (use-package evil-search-highlight-persist
   :commands (evil-search-highlight-persist)
@@ -215,27 +244,27 @@
   (setq fci-rule-column 70))
 
 ;; Magit
- (use-package magit
-   :ensure t
-   :demand magit
-   :demand evil
-   :config
-   (progn
-     (setq magit-auto-revert-mode nil)
-     (setq magit-last-seen-setup-instructions "1.4.0")
-     (evil-set-initial-state 'magit-mode 'normal)
-     (evil-set-initial-state 'magit-status-mode 'normal)
-     (evil-set-initial-state 'magit-diff-mode 'normal)
-     (evil-set-initial-state 'magit-log-mode 'normal)
-     (evil-define-key 'normal magit-mode-map
-       "j" 'magit-goto-next-section
-       "k" 'magit-goto-previous-section)
-     (evil-define-key 'normal magit-log-mode-map
-       "j" 'magit-goto-next-section
-       "k" 'magit-goto-previous-section)
-     (evil-define-key 'normal magit-diff-mode-map
-       "j" 'magit-goto-next-section
-       "k" 'magit-goto-previous-section)))
+(use-package magit
+  :ensure t
+  :demand magit
+  :demand evil
+  :config
+  (progn
+    (setq magit-auto-revert-mode nil)
+    (setq magit-last-seen-setup-instructions "1.4.0")
+    (evil-set-initial-state 'magit-mode 'normal)
+    (evil-set-initial-state 'magit-status-mode 'normal)
+    (evil-set-initial-state 'magit-diff-mode 'normal)
+    (evil-set-initial-state 'magit-log-mode 'normal)
+    (evil-define-key 'normal magit-mode-map
+      "j" 'magit-goto-next-section
+      "k" 'magit-goto-previous-section)
+    (evil-define-key 'normal magit-log-mode-map
+      "j" 'magit-goto-next-section
+      "k" 'magit-goto-previous-section)
+    (evil-define-key 'normal magit-diff-mode-map
+      "j" 'magit-goto-next-section
+      "k" 'magit-goto-previous-section)))
 
 (use-package evil
   :ensure t
