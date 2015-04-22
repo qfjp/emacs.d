@@ -91,17 +91,23 @@
   :config
   (setq jedi:complete-on-dot t))
 
+;;(eval-after-load 'helm
+;;  '(progn
+;;     (evil-set-initial-state 'helm-mode 'normal)
+;;     (evil-define-key 'normal helm-mode-map
+;;       (kbd "j") 'helm-next-line)))
+
 (defun my-ibuffer-evil-keymaps ()
   "Keymaps for ibuffer in evil mode."
   (eval-after-load 'ibuffer
     '(progn
        (evil-set-initial-state 'ibuffer-mode 'normal)
        (evil-define-key 'normal ibuffer-mode-map
-	 (kbd "J") 'ibuffer-jump-to-buffer
-	 (kbd "j") 'evil-next-line
-	 (kbd "k") 'evil-previous-line
-	 (kbd "l") 'ibuffer-visit-buffer
-	 (kbd "v") 'ibuffer-toggle-marks))))
+         (kbd "J") 'ibuffer-jump-to-buffer
+         (kbd "j") 'evil-next-line
+         (kbd "k") 'evil-previous-line
+         (kbd "l") 'ibuffer-visit-buffer
+         (kbd "v") 'ibuffer-toggle-marks))))
 
 ;; Package menu mode
 (defun my-package-list-evil-keymaps ()
@@ -110,12 +116,12 @@
     '(progn
        (evil-set-initial-state 'package-menu-mode 'normal)
        (evil-define-key 'normal package-menu-mode-map
-	 (kbd "d") 'package-menu-mark-delete
-	 (kbd "K") 'package-menu-describe-package
-	 (kbd "i") 'package-menu-mark-install
-	 (kbd "x") 'package-menu-execute
-	 (kbd "j") 'evil-next-line
-	 (kbd "k") 'evil-previous-line))))
+         (kbd "d") 'package-menu-mark-delete
+         (kbd "K") 'package-menu-describe-package
+         (kbd "i") 'package-menu-mark-install
+         (kbd "x") 'package-menu-execute
+         (kbd "j") 'evil-next-line
+         (kbd "k") 'evil-previous-line))))
 
 ;; dired
 (defun my-dired-evil-keymaps ()
@@ -126,32 +132,32 @@
     '(progn
        (evil-set-initial-state 'dired-mode 'normal)
        (defun my-dired-up-directory ()
-	 "Take dired up one directory, but behave like
- dired-find-alternate-file."
-	 (interactive)
-	 (let ((old (current-buffer)))
-	   (dired-up-directory)
-	   (kill-buffer old)))
+         "Take dired up one directory, but behave like
+                        dired-find-alternate-file."
+         (interactive)
+         (let ((old (current-buffer)))
+           (dired-up-directory)
+           (kill-buffer old)))
        (evil-define-key 'normal dired-mode-map "h"
-	 'my-dired-up-directory)
+         'my-dired-up-directory)
        (evil-define-key 'normal dired-mode-map "l"
-	 'dired-find-alternate-file)
+         'dired-find-alternate-file)
        (evil-define-key 'normal dired-mode-map "o"
-	 'dired-sort-toggle-or-edit)
+         'dired-sort-toggle-or-edit)
        (evil-define-key 'normal dired-mode-map "v"
-	 'dired-toggle-marks)
+         'dired-toggle-marks)
        (evil-define-key 'normal dired-mode-map "m" 'dired-mark)
        (evil-define-key 'normal dired-mode-map "u" 'dired-unmark)
        (evil-define-key 'normal dired-mode-map "U"
-	 'dired-unmark-all-marks)
+         'dired-unmark-all-marks)
        (evil-define-key 'normal dired-mode-map "c"
-	 'dired-create-directory)
+         'dired-create-directory)
        (evil-define-key 'normal dired-mode-map "n"
-	 'evil-search-next)
+         'evil-search-next)
        (evil-define-key 'normal dired-mode-map "N"
-	 'evil-search-previous)
+         'evil-search-previous)
        (evil-define-key 'normal dired-mode-map "q"
-	 'kill-this-buffer))))
+         'kill-this-buffer))))
 
 
 (use-package key-chord
