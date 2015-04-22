@@ -33,6 +33,12 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package linum-relative
+  :ensure t
+  :demand linum-relative
+  :config
+  (add-hook 'after-change-major-mode-hook 'linum-mode))
+
 (use-package auto-complete
   :ensure t
   :demand auto-complete
@@ -232,6 +238,7 @@
   :demand evil
   :config
   (progn
+    (setq evil-search-wrap nil)
     (define-key evil-normal-state-map (kbd "gh") 'help-command)
     (define-key key-translation-map (kbd "gx") (kbd "C-x"))
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
