@@ -24,9 +24,6 @@
 ;; Emacs evil will use c-u to scroll
 (setq evil-want-C-u-scroll t)
 
-;; disable search auto-wrap
-;;(setq isearch-wrap-function '(lambda nil))
-
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
 
