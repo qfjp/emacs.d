@@ -42,7 +42,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
-
+(use-package exec-path-from-shell
+ :ensure t
+ :init
+ (exec-path-from-shell-initialize))
 
 (use-package helm
   :ensure t
@@ -196,7 +199,6 @@
   :config
   (display-time-mode t))
 
-
 ;; Flycheck
 (use-package flycheck
   :ensure t
@@ -278,6 +280,7 @@
     (evil-set-initial-state 'magit-status-mode 'normal)
     (evil-set-initial-state 'magit-diff-mode 'normal)
     (evil-set-initial-state 'magit-log-mode 'normal)
+    (evil-set-initial-state 'magit-process-mode 'normal)
     (evil-define-key 'normal magit-mode-map
       "j" 'magit-goto-next-section
       "k" 'magit-goto-previous-section
@@ -327,6 +330,7 @@
     (my-package-list-evil-keymaps)
     (my-ibuffer-evil-keymaps)
     (evil-mode 1)))
+
 
 (provide 'init)
 ;;; init.el ends here
