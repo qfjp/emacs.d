@@ -42,18 +42,7 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(defun my-ido-evil-keymaps ()
-  "Keymaps for ido in evil mode."
-  (progn
-    (define-key ido-completion-map (kbd "l") 'ido-next-match)
-    (define-key ido-completion-map (kbd "h") 'ido-prev-match)))
-(use-package ido
-  :demand evil
-  :init (ido-mode t)
-  :config
-  (add-hook 'ido-minibuffer-setup-hook
-            'my-ido-evil-keymaps)
-  )
+
 
 (use-package helm
   :ensure t
@@ -217,12 +206,6 @@
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
-;;;; flycheck errors on tooltip - not in console :-(
-;;;(when (display-graphic-p (selected-frame))
-;;;  (eval-after-load 'flycheck
-;;;    '(custom-set-variables
-;;;      '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages))))
-
 ;; Elisp slime nav
 (use-package elisp-slime-nav
   :ensure t
@@ -254,6 +237,13 @@
   (add-hook 'after-change-major-mode-hook 'fci-mode)
   (setq fci-rule-column 70))
 
+(require 'ansi-color)
+(defun display-ansi-colors ()
+  "Display colors from ansi codes."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'magit-process-mode-hook 'display-ansi-colors)
 ;; Magit
 (use-package magit
   :ensure t
@@ -279,7 +269,23 @@
       "k" 'magit-goto-previous-section)
     (evil-define-key 'normal magit-diff-mode-map
       "j" 'magit-goto-next-section
-      "k" 'magit-goto-previous-section)))
+      "k" 'magit-goto-previous-section)
+    (evil-define-key 'normal magit-process-mode-map
+      "j" 'evil-next-line
+      "k" 'evil-previous-line)))
+
+(defun my-ido-evil-keymaps ()
+  "Keymaps for ido in evil mode."
+  (progn
+    (define-key ido-completion-map (kbd "l") 'ido-next-match)
+    (define-key ido-completion-map (kbd "h") 'ido-prev-match)))
+
+(use-package ido
+  :demand evil
+  :init (ido-mode t)
+  :config
+  (add-hook 'ido-minibuffer-setup-hook
+            'my-ido-evil-keymaps))
 
 (use-package evil
   :ensure t
