@@ -39,10 +39,15 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(use-package exec-path-from-shell
- :ensure t
- :init
- (exec-path-from-shell-initialize))
+(use-package keychain-environment
+  :ensure t
+  :init
+  (keychain-refresh-environment))
+
+;; (use-package exec-path-from-shell
+;;  :ensure t
+;;  :init
+;;  (exec-path-from-shell-initialize))
 
 (use-package helm
   :ensure t
