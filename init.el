@@ -8,6 +8,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; stop prompting about git symlinks
+(setq vc-follow-symlinks t)
+
 ;; Minibuffer persistent history
 (savehist-mode 1)
 
@@ -142,7 +145,6 @@
          'evil-search-previous)
        (evil-define-key 'normal dired-mode-map "q"
          'kill-this-buffer))))
-
 
 (use-package key-chord
   :ensure t
