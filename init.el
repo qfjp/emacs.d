@@ -143,6 +143,7 @@
          'evil-search-next)
        (evil-define-key 'normal dired-mode-map "N"
          'evil-search-previous)
+       (evil-define-key 'normal dired-mode-map ";" 'evil-ex)
        (evil-define-key 'normal dired-mode-map "q"
          'kill-this-buffer))))
 
