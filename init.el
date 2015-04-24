@@ -60,41 +60,26 @@
   :config
   (add-hook 'after-change-major-mode-hook 'linum-mode))
 
-(use-package auto-complete
-  :ensure t
-  :demand auto-complete
-  :init
-  (ac-config-default)
-  (require 'auto-complete-config)
-  :config
-  (define-key ac-complete-mode-map (kbd "C-n") 'ac-expand)
-  (define-key ac-menu-map (kbd "C-b") 'ac-previous)
-  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
-(use-package ac-helm
-  :ensure t)
+ (use-package auto-complete
+   :ensure t
+   :demand auto-complete
+   :init
+   (ac-config-default)
+   (require 'auto-complete-config)
+   :config
+   (setq ac-auto-show-menu t)
+   (setq ac-show-menu-immediately-on-auto-complete t)
+   (setq ac-use-menu-map t)
+   (define-key ac-menu-map (kbd "C-n") 'ac-next)
+   (define-key ac-menu-map (kbd "C-p") 'ac-previous))
 
-;; (use-package auto-complete
-;;   :ensure t
-;;   :demand ac-helm
-;;   :init
-;;   (ac-config-default)
-;;   :config
-;;   (global-set-key (kbd "C-n") 'ac-complete-with-helm)
-;;   (define-key ac-complete-mode-map (kbd "C-n") 'ac-complete-with-helm))
-
-(use-package jedi
-  :ensure t
-  :demand jedi
-  :init
-  (add-hook 'python-mode-hook 'jedi:setup)
-  :config
-  (setq jedi:complete-on-dot t))
-
-;;(eval-after-load 'helm
-;;  '(progn
-;;     (evil-set-initial-state 'helm-mode 'normal)
-;;     (evil-define-key 'normal helm-mode-map
-;;       (kbd "j") 'helm-next-line)))
+ (use-package jedi
+   :ensure t
+   :demand jedi
+   :init
+   (add-hook 'python-mode-hook 'jedi:setup)
+   :config
+   (setq jedi:complete-on-dot t))
 
 (defun my-ibuffer-evil-keymaps ()
   "Keymaps for ibuffer in evil mode."
