@@ -274,7 +274,8 @@
       "j" 'magit-goto-next-section
       "k" 'magit-goto-previous-section
       "c" 'magit-commit
-      "-" 'magit-stage-item
+      "s" 'magit-stage-item
+      "u" 'magit-unstage-item
       "p" 'magit-toggle-section
       "P" 'magit-push)
     (evil-define-key 'normal magit-log-mode-map
