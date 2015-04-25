@@ -44,18 +44,25 @@
 
 (use-package keychain-environment
   :ensure t
+  :demand keychain-environment
   :init
   (keychain-refresh-environment))
 
 (use-package exec-path-from-shell
- :ensure t
- :init
- (exec-path-from-shell-initialize))
+  :ensure t
+  :demand exec-path-from-shell
+  :init
+  (exec-path-from-shell-initialize))
 
 (use-package helm
   :ensure t
+  :demand helm
   :config
   (global-set-key (kbd "M-x") 'helm-M-x))
+
+;;(use-package yasnippet
+;;  :ensure t
+;;  :demand yasnippet)
 
 (use-package linum-relative
   :ensure t
@@ -66,13 +73,21 @@
  (use-package auto-complete
    :ensure t
    :demand auto-complete
+   :demand yasnippet
    :init
+   (yas-global-mode t)
    (ac-config-default)
    (require 'auto-complete-config)
    :config
+   (ac-set-trigger-key "TAB")
+   (ac-set-trigger-key "<tab>")
    (setq ac-auto-show-menu t)
    (setq ac-show-menu-immediately-on-auto-complete t)
    (setq ac-use-menu-map t)
+   (defun add-yasnippet-ac-sources ()
+     "Add yasnippet to autocomplete sources."
+     (add-to-list 'ac-sources 'ac-source-yasnippet))
+   (add-hook 'after-change-major-mode-hook 'add-yasnippet-ac-sources)
    (define-key ac-menu-map (kbd "C-n") 'ac-next)
    (define-key ac-menu-map (kbd "C-p") 'ac-previous))
 
