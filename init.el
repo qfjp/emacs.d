@@ -103,8 +103,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "w" 'save-buffer)
     (evil-leader/set-key "q" 'kill-buffer-and-window)
-    (evil-leader/set-key "b" 'ido-switch-buffer)
-    ))
+    (evil-leader/set-key "b" 'ido-switch-buffer)))
 
 (use-package evil-search-highlight-persist
   :commands (evil-search-highlight-persist)
