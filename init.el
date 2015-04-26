@@ -142,16 +142,18 @@
   (let ((fci-enabled (sanityinc/fci-enabled-p)))
     (when fci-enabled
       (setq sanityinc/fci-mode-suppressed fci-enabled)
-      (turn-off-fci-mode)
-      (linum-mode -1))))
+      (turn-off-fci-mode))))
 
 (defadvice popup-delete (after restore-fci-mode activate)
   "Restore 'fci-mode' and 'linum mode' when all popups have closed."
   (when (and sanityinc/fci-mode-suppressed
              (null popup-instances))
     (setq sanityinc/fci-mode-suppressed nil)
-    (turn-on-fci-mode)
-    (linum-mode)))
+    (turn-on-fci-mode)))
+
+(add-hook 'evil-insert-state-entry-hook (lambda () (linum-mode -1)))
+(add-hook 'evil-insert-state-exit-hook (lambda () (linum-mode)))
+                    
 
 (use-package fill-column-indicator
   :ensure t
