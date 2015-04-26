@@ -216,6 +216,7 @@
   :ensure t
   :commands (evil)
   :demand evil
+  :demand swbuff-x
   :config
   (progn
     (setq evil-search-wrap nil)
@@ -225,6 +226,10 @@
     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+    (define-key evil-normal-state-map (kbd "C-n")
+      'swbuff-switch-to-next-buffer)
+    (define-key evil-normal-state-map (kbd "C-b")
+      'swbuff-switch-to-previous-buffer)
     (define-key evil-normal-state-map (kbd ";") 'evil-ex)
     (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
     (my-dired-evil-keymaps)
