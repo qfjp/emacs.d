@@ -6,6 +6,8 @@
   :ensure t
   :demand fill-column-indicator
   :config
+  (setq fci-rule-character #x2593)
+  (setq fci-rule-color "gray19")
   (add-hook 'after-change-major-mode-hook 'fci-mode)
   (setq fci-rule-column 70))
 
