@@ -10,7 +10,7 @@
 
 ;; paren matching (highlight expression)
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+;;(setq show-paren-style 'expression)
 
 ;; stop prompting about git symlinks
 (setq vc-follow-symlinks t)
