@@ -8,6 +8,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; Highlight cursor mode
+(global-hl-line-mode)
+
 ;; paren matching (highlight expression)
 (show-paren-mode 1)
 ;;(setq show-paren-style 'expression)
