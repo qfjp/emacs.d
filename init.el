@@ -8,6 +8,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; paren matching (highlight expression)
+(show-paren-mode 1)
+(setq show-paren-style 'expression)
+
 ;; stop prompting about git symlinks
 (setq vc-follow-symlinks t)
 
@@ -70,34 +74,35 @@
   :config
   (add-hook 'after-change-major-mode-hook 'linum-mode))
 
- (use-package auto-complete
-   :ensure t
-   :demand auto-complete
-   :demand yasnippet
-   :init
-   (yas-global-mode t)
-   (ac-config-default)
-   (require 'auto-complete-config)
-   :config
-   (ac-set-trigger-key "TAB")
-   (ac-set-trigger-key "<tab>")
-   (setq ac-auto-show-menu t)
-   (setq ac-show-menu-immediately-on-auto-complete t)
-   (setq ac-use-menu-map t)
-   (defun add-yasnippet-ac-sources ()
-     "Add yasnippet to autocomplete sources."
-     (add-to-list 'ac-sources 'ac-source-yasnippet))
-   (add-hook 'after-change-major-mode-hook 'add-yasnippet-ac-sources)
-   (define-key ac-menu-map (kbd "C-n") 'ac-next)
-   (define-key ac-menu-map (kbd "C-p") 'ac-previous))
+(use-package auto-complete
+  :ensure t
+  :demand auto-complete
+  :demand yasnippet
+  :init
+  (yas-global-mode t)
+  (ac-config-default)
+  (require 'auto-complete-config)
+  :config
+  (ac-linum-workaround)
+  (ac-set-trigger-key "TAB")
+  (ac-set-trigger-key "<tab>")
+  (setq ac-auto-show-menu t)
+  (setq ac-show-menu-immediately-on-auto-complete t)
+  (setq ac-use-menu-map t)
+  (defun add-yasnippet-ac-sources ()
+    "Add yasnippet to autocomplete sources."
+    (add-to-list 'ac-sources 'ac-source-yasnippet))
+  (add-hook 'after-change-major-mode-hook 'add-yasnippet-ac-sources)
+  (define-key ac-menu-map (kbd "C-n") 'ac-next)
+  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
 
- (use-package jedi
-   :ensure t
-   :demand jedi
-   :init
-   (add-hook 'python-mode-hook 'jedi:setup)
-   :config
-   (setq jedi:complete-on-dot t))
+(use-package jedi
+  :ensure t
+  :demand jedi
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup)
+  :config
+  (setq jedi:complete-on-dot t))
 
 (defun my-ibuffer-evil-keymaps ()
   "Keymaps for ibuffer in evil mode."
@@ -135,7 +140,7 @@
        (evil-set-initial-state 'dired-mode 'normal)
        (defun my-dired-up-directory ()
          "Take dired up one directory, but behave like
-                        dired-find-alternate-file."
+                         dired-find-alternate-file."
          (interactive)
          (let ((old (current-buffer)))
            (dired-up-directory)
@@ -228,12 +233,19 @@
 
 ;; Theme
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("261f5ddd72a1c0b47200e13d872075af5f78c3f07d2968bddc0301261934f210"
-     "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22"
-     default))))
-(custom-set-faces)
+    ("261f5ddd72a1c0b47200e13d872075af5f78c3f07d2968bddc0301261934f210" "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
 (load-theme 'base16-default-dark)
 
 ;; Fill column indicator
