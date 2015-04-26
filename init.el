@@ -34,138 +34,24 @@
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
 
-(require 'package)
-(package-initialize)
-(setq package-enable-at-startup nil)
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("org" . "http://orgmode.org/elpa/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+;; Keymap configurations
+(add-to-list 'load-path (concat user-emacs-directory "keymaps"))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
+(require 'my-ibuffer-keys)
+(require 'my-package-list-keys)
+(require 'my-dired-keys)
 
-(use-package keychain-environment
-  :ensure t
-  :demand keychain-environment
-  :init
-  (keychain-refresh-environment))
+;; Plugin Configurations
+(add-to-list 'load-path (concat user-emacs-directory "plug"))
 
-(use-package exec-path-from-shell
-  :ensure t
-  :demand exec-path-from-shell
-  :init
-  (exec-path-from-shell-initialize))
-
-(use-package helm
-  :ensure t
-  :demand helm
-  :config
-  (global-set-key (kbd "M-x") 'helm-M-x))
-
-;;(use-package yasnippet
-;;  :ensure t
-;;  :demand yasnippet)
-
-(use-package linum-relative
-  :ensure t
-  :demand linum-relative
-  :config
-  (add-hook 'after-change-major-mode-hook 'linum-mode))
-
-(use-package auto-complete
-  :ensure t
-  :demand auto-complete
-  :demand yasnippet
-  :init
-  (yas-global-mode t)
-  (ac-config-default)
-  (require 'auto-complete-config)
-  :config
-  (ac-linum-workaround)
-  (ac-set-trigger-key "TAB")
-  (ac-set-trigger-key "<tab>")
-  (setq ac-auto-show-menu t)
-  (setq ac-show-menu-immediately-on-auto-complete t)
-  (setq ac-use-menu-map t)
-  (defun add-yasnippet-ac-sources ()
-    "Add yasnippet to autocomplete sources."
-    (add-to-list 'ac-sources 'ac-source-yasnippet))
-  (add-hook 'after-change-major-mode-hook 'add-yasnippet-ac-sources)
-  (define-key ac-menu-map (kbd "C-n") 'ac-next)
-  (define-key ac-menu-map (kbd "C-p") 'ac-previous))
-
-(use-package jedi
-  :ensure t
-  :demand jedi
-  :init
-  (add-hook 'python-mode-hook 'jedi:setup)
-  :config
-  (setq jedi:complete-on-dot t))
-
-(defun my-ibuffer-evil-keymaps ()
-  "Keymaps for ibuffer in evil mode."
-  (eval-after-load 'ibuffer
-    '(progn
-       (evil-set-initial-state 'ibuffer-mode 'normal)
-       (evil-define-key 'normal ibuffer-mode-map
-         (kbd "J") 'ibuffer-jump-to-buffer
-         (kbd "j") 'evil-next-line
-         (kbd "k") 'evil-previous-line
-         (kbd "l") 'ibuffer-visit-buffer
-         (kbd "v") 'ibuffer-toggle-marks))))
-
-;; Package menu mode
-(defun my-package-list-evil-keymaps ()
-  "Keymaps for package in evil mode."
-  (eval-after-load 'package
-    '(progn
-       (evil-set-initial-state 'package-menu-mode 'normal)
-       (evil-define-key 'normal package-menu-mode-map
-         (kbd "d") 'package-menu-mark-delete
-         (kbd "K") 'package-menu-describe-package
-         (kbd "i") 'package-menu-mark-install
-         (kbd "x") 'package-menu-execute
-         (kbd "j") 'evil-next-line
-         (kbd "k") 'evil-previous-line))))
-
-;; dired
-(defun my-dired-evil-keymaps ()
-  "Evil keymaps for dired-x."
-  (require 'dired-x)
-  (put 'dired-find-alternate-file 'disabled nil)
-  (eval-after-load 'dired
-    '(progn
-       (evil-set-initial-state 'dired-mode 'normal)
-       (defun my-dired-up-directory ()
-         "Take dired up one directory, but behave like
-                         dired-find-alternate-file."
-         (interactive)
-         (let ((old (current-buffer)))
-           (dired-up-directory)
-           (kill-buffer old)))
-       (evil-define-key 'normal dired-mode-map "h"
-         'my-dired-up-directory)
-       (evil-define-key 'normal dired-mode-map "l"
-         'dired-find-alternate-file)
-       (evil-define-key 'normal dired-mode-map "o"
-         'dired-sort-toggle-or-edit)
-       (evil-define-key 'normal dired-mode-map "v"
-         'dired-toggle-marks)
-       (evil-define-key 'normal dired-mode-map "m" 'dired-mark)
-       (evil-define-key 'normal dired-mode-map "u" 'dired-unmark)
-       (evil-define-key 'normal dired-mode-map "U"
-         'dired-unmark-all-marks)
-       (evil-define-key 'normal dired-mode-map "c"
-         'dired-create-directory)
-       (evil-define-key 'normal dired-mode-map "n"
-         'evil-search-next)
-       (evil-define-key 'normal dired-mode-map "N"
-         'evil-search-previous)
-       (evil-define-key 'normal dired-mode-map ";" 'evil-ex)
-       (evil-define-key 'normal dired-mode-map "q"
-         'kill-this-buffer))))
+(require 'my-package)
+(require 'my-use-package)
+(require 'my-env-setup)
+(require 'my-swbuff-x)
+(require 'my-helm)
+(require 'my-linum)
+(require 'my-autocomplete)
+(require 'my-flycheck)
 
 (use-package key-chord
   :ensure t
@@ -199,7 +85,8 @@
   :init
   (global-evil-search-highlight-persist t)
   :config
-  (evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all))
+  (evil-leader/set-key "SPC"
+    'evil-search-highlight-persist-remove-all))
 
 (use-package powerline-evil
   :ensure t
@@ -208,15 +95,6 @@
   (powerline-evil-vim-color-theme)
   :config
   (display-time-mode t))
-
-;; Flycheck
-(use-package flycheck
-  :ensure t
-  :demand flycheck
-  :init
-  (global-flycheck-mode t)
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 ;; Elisp slime nav
 (use-package elisp-slime-nav
@@ -239,13 +117,16 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("261f5ddd72a1c0b47200e13d872075af5f78c3f07d2968bddc0301261934f210" "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22" default))))
+    ("261f5ddd72a1c0b47200e13d872075af5f78c3f07d2968bddc0301261934f210"
+     "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22"
+     default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
+ '(show-paren-match ((t (:background
+                         "dim gray" :foreground "#202020")))))
 (load-theme 'base16-default-dark)
 
 ;; Fill column indicator
