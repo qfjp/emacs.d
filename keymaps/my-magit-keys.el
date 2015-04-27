@@ -11,6 +11,8 @@
       (evil-set-initial-state 'magit-log-mode 'normal)
       (evil-set-initial-state 'magit-process-mode 'normal)
       (evil-define-key 'normal magit-mode-map
+        (kbd "-") 'magit-diff-smaller-hunks
+        (kbd "+") 'magit-diff-larger-hunks
         (kbd "j") 'magit-goto-next-section
         (kbd "k") 'magit-goto-previous-section
         (kbd "c") 'magit-commit
