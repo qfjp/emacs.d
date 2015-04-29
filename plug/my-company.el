@@ -7,6 +7,8 @@
   (yas-global-mode 1))
 (use-package company
   :ensure t
+  :ensure company-anaconda
+  :ensure anaconda-mode
   :init
   (add-hook 'after-init-hook 'global-company-mode)
   :config
@@ -33,6 +35,6 @@
 
   ;;(setq company-backends
   ;;      (mapcar #'company-mode/backend-with-yas company-backends)))
-)
+  )
 (provide 'my-company)
 ;;; my-company ends here
