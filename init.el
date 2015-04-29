@@ -71,6 +71,7 @@
 
 ;; Plugin Configurations
 (add-to-list 'load-path (concat user-emacs-directory "plug"))
+(add-to-list 'load-path (concat user-emacs-directory "plug/modeline"))
 
 (require 'my-package)
 (require 'my-use-package)
