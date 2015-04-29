@@ -82,7 +82,6 @@
 (require 'my-fill-column-indicator)
 (require 'my-magit)
 (require 'my-ido)
-(require 'my-mode-line)
 
 (use-package key-chord
   :ensure t
@@ -145,6 +144,7 @@
     (my-ibuffer-evil-keymaps)
     (my-magit-evil-keymaps)
     (evil-mode 1)))
+(require 'my-mode-line)
 
 ;; (require 'ansi-color)
 ;; (defun display-ansi-colors ()
