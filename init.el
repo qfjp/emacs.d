@@ -125,6 +125,8 @@
   :config
   (progn
     (setq evil-search-wrap nil)
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "K")
+      'elisp-slime-nav-describe-elisp-thing-at-point)
     (define-key evil-normal-state-map (kbd "gh") 'help-command)
     (define-key key-translation-map (kbd "gx") (kbd "C-x"))
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
