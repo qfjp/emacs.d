@@ -57,6 +57,9 @@
  '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
 (load-theme 'base16-default-dark)
 
+;; Paren matching
+(electric-pair-mode t)
+
 ;; Keymap configurations
 (add-to-list 'load-path (concat user-emacs-directory "keymaps"))
 
