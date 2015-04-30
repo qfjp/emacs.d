@@ -265,7 +265,9 @@
         (write-spaces
          (- (window-width)
             (+ (string-width (format-mode-line mode-line-left))
-               (string-width (format-mode-line mode-line-right))))
+               (string-width (format-mode-line mode-line-right)))
+            -4
+            )
          "")))
 
 (defun refresh-mode-line (&optional arg arg2 arg3)
