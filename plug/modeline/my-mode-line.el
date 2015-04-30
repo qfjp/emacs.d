@@ -272,14 +272,17 @@
    ((equalp length 0) accum)
    (t (write-spaces (- length 1) (concat accum " ")))))
 
+(defvar-local ml/fudge-val -4)
 (defun refresh-left-right-buffer ()
   "Set the size of the gap between the left and right messages."
+  (when (display-graphic-p)
+    (setq ml/fudge-val -17))
   (setq left-right-buffer
         (write-spaces
          (- (window-width)
             (+ (string-width (format-mode-line mode-line-left))
                (string-width (format-mode-line mode-line-right)))
-            -4
+            ml/fudge-val ;; quick hack to fill out buffer in console
             )
          "")))
 
