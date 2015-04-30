@@ -128,13 +128,13 @@
   (refresh-major-mode-msg)
   (setq sep-indicator "encoding")
   (refresh-encoding-msg)
-;  (refresh-scrollbar-msg)
+  (refresh-scrollbar-msg)
   (refresh-ruler-msg)
   (refresh-left-right-buffer))
 
 (defun refresh-scrollbar-msg ()
   (setq scrollbar-msg
-        (get-bar-text 10 ?\u25A0 ?\u25AB)))
+        (sb/get-bar-text 10 ?\u25A0 ?\u25AB)))
 
 
 (defun refresh-major-mode-msg ()
