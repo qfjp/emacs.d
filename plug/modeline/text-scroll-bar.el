@@ -31,6 +31,7 @@
 (defun sb/get-bar-text (size bar handle)
   "Draw a scroll bar of length SIZE using the characters BAR and HANDLE."
   (cond ((minibufferp (current-buffer)) "")
+        ((equalp (point) 1) "")
         ((string-match "^\*.*\*" (buffer-name (current-buffer))) "")
          (t
           (setq sb/visible-lines
