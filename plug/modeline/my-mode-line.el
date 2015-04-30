@@ -7,6 +7,14 @@
 (use-package nyan-mode
   :ensure t)
 
+;; Colors
+(tty-color-define "green" 151)
+(tty-color-define "blue" 67)
+(tty-color-define "purple" 139)
+(tty-color-define "orange" 173)
+(tty-color-define "red" 131)
+(tty-color-define "pink" 182)
+
 ;; State vars
 (defvar normal-color)
 (defvar insert-color)
@@ -14,12 +22,67 @@
 (defvar replace-color)
 (defvar cur-state-color)
 (defvar text-color)
-(setq-default text-color "gray12")
-(setq-default normal-color "#4a708b")
-(setq-default insert-color "#9acd32")
-(setq-default visual-color "#ffdead")
-(setq-default replace-color "#cd5c5c")
-(setq-default cur-state-color "#cd5c5c")
+
+
+(defun refresh-colors ()
+  "Set colors based on whether we are in a GUI or tty."
+  (setq text-color "gray12")
+  (setq normal-color "blue")
+  (setq insert-color "green")
+  (setq visual-color "orange")
+  (setq replace-color "red")
+  (setq cur-state-color "blue")
+  (if window-system
+      (progn
+        (setq normal-color "#6a95b5")
+        (setq insert-color "#99cc99")
+        (setq visual-color "#d28445")
+        (setq replace-color "#ac4142"))))
+
+(defun refresh-faces ()
+  "Refresh the faces for the evil state."
+  (setq-default
+   normal-face
+   `(:foreground
+     ,text-color
+     :background
+     ,normal-color
+     :height
+     0.9
+     :weight bold))
+  (setq-default
+   insert-face
+   `(:foreground
+     ,text-color
+     :background
+     ,insert-color
+     :height
+     0.9
+     :weight
+     bold))
+  (setq-default
+   visual-face
+   `(:foreground
+     ,text-color
+     :background
+     ,visual-color
+     :height
+     0.9
+     :weight
+     bold))
+  (setq-default
+   replace-face
+   `(:foreground
+     ,text-color
+     :background
+     ,replace-color
+     :height
+     0.9
+     :weight
+     bold)))
+
+(refresh-colors)
+(refresh-faces)
 
 (defvar normal-face)
 (defvar insert-face)
@@ -54,45 +117,6 @@
 (defvar encoding-section-back-color)
 (setq encoding-section-back-color "#454545")
 
-(setq-default
- normal-face
- `(:foreground
-   ,text-color
-   :background
-   ,normal-color
-   :height
-   0.9
-   :weight bold))
-(setq-default
- insert-face
- `(:foreground
-   ,text-color
-   :background
-   ,insert-color
-   :height
-   0.9
-   :weight
-   bold))
-(setq-default
- visual-face
- `(:foreground
-   ,text-color
-   :background
-   ,visual-color
-   :height
-   0.9
-   :weight
-   bold))
-(setq-default
- replace-face
- `(:foreground
-   ,text-color
-   :background
-   ,replace-color
-   :height
-   0.9
-   :weight
-   bold))
 
 (defvar new-fore)
 (defvar new-back)
@@ -101,6 +125,8 @@
 ;; Main hook
 (defun refresh-evil-state-msg ()
   "Return the state of evil mode."
+  (refresh-colors)
+  (refresh-faces)
   (setq new-back optional-section-back-color)
   (cond
    ((evil-normal-state-p)
@@ -276,7 +302,7 @@
 (defun refresh-left-right-buffer ()
   "Set the size of the gap between the left and right messages."
   (when (display-graphic-p)
-    (setq ml/fudge-val -17))
+    (setq ml/fudge-val -16))
   (setq left-right-buffer
         (write-spaces
          (- (window-width)
