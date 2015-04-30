@@ -263,7 +263,7 @@
   "Set the size of the gap between the left and right messages."
   (setq left-right-buffer
         (write-spaces
-         (- (frame-width)
+         (- (window-width)
             (+ (string-width (format-mode-line mode-line-left))
                (string-width (format-mode-line mode-line-right))))
          "")))
