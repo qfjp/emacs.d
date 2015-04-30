@@ -196,21 +196,6 @@
     (my-magit-evil-keymaps)
     (evil-mode 1)))
 (require 'my-mode-line)
-;;(use-package guide-key
-;;  :ensure t
-;;  :init
-;;  (guide-key-mode t)
-;;  :config
-;;  (setq guide-key/guide-key-sequence '("C-x"))
-;;  (setq guide-key/idle-delay 0.1))
-
-;; (require 'ansi-color)
-;; (defun display-ansi-colors ()
-;;   "Display colors from ansi codes."
-;;   (interactive)
-;;   (let ((inhibit-read-only t))
-;;     (ansi-color-apply-on-region (point-min) (point-max))))
-;; (add-hook 'magit-process-mode-hook 'display-ansi-colors)
 
 (provide 'init)
 ;;; init.el ends here

@@ -11,7 +11,6 @@
   "Get the name of the current git branch (or nil if not versioned)."
   (cond
    ((equalp (call-process-shell-command "git rev-parse --git-dir") 0)
-    ;(set-branch-name)
     (setq git-branch-msg
           (concat
            "  "
