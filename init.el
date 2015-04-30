@@ -42,6 +42,11 @@
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
 
+;; Make emacs remember the last place in a file
+(setq save-place-file "~/.emacs.d/.place")
+(setq-default save-place t)
+(require 'saveplace)
+
 ;; Theme
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -92,11 +97,6 @@
 (require 'my-magit)
 (require 'my-ido)
 
-(use-package key-chord
-  :ensure t
-  :demand key-chord
-  :demand evil
-  :init
 ;; theme
 (use-package base16-theme
   :ensure t
@@ -120,6 +120,11 @@
 (setq TeX-view-program-list
       '(("PDF Viewer" "zathura %o")))
 
+(use-package key-chord
+  :ensure t
+  :demand key-chord
+  :demand evil
+  :init
   (key-chord-mode 1)
   :config
   (key-chord-define-global "jk" 'evil-normal-state))
@@ -191,6 +196,13 @@
     (my-magit-evil-keymaps)
     (evil-mode 1)))
 (require 'my-mode-line)
+;;(use-package guide-key
+;;  :ensure t
+;;  :init
+;;  (guide-key-mode t)
+;;  :config
+;;  (setq guide-key/guide-key-sequence '("C-x"))
+;;  (setq guide-key/idle-delay 0.1))
 
 ;; (require 'ansi-color)
 ;; (defun display-ansi-colors ()
