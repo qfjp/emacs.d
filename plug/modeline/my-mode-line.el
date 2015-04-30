@@ -4,6 +4,9 @@
 ;;; Code:
 (require 'evil)
 (require 'git-modeline)
+(use-package nyan-mode
+  :ensure t)
+
 ;; State vars
 (defvar normal-color)
 (defvar insert-color)
@@ -128,14 +131,8 @@
   (refresh-major-mode-msg)
   (setq sep-indicator "encoding")
   (refresh-encoding-msg)
-  (refresh-scrollbar-msg)
   (refresh-ruler-msg)
   (refresh-left-right-buffer))
-
-(defun refresh-scrollbar-msg ()
-  (setq scrollbar-msg
-        (sb/get-bar-text 10 ?\u25A0 ?\u25AB)))
-
 
 (defun refresh-major-mode-msg ()
   "Give an indicator for the major mode."
@@ -192,13 +189,29 @@
 
 (defun refresh-ruler-msg ()
   "Set the value of the ruler message."
+  ;;(setq-default
+  ;; face-remapping-alist
+  ;; `(
+  ;;   (sml-modeline-end-face :foreground ,text-color
+  ;;                          :background ,cur-state-color
+  ;;                          :weight bold)
+  ;;   (sml-modeline-vis-face :weight bold)
+  ;;   ))
+  (setq-default nyan-bar-length 10)
+  (setq-default nyan-cat-face-number 1)
+  (setq-default nyan-wavy-trail t)
   (setq ruler-msg
         (concat
-         (propertize scrollbar-msg 'face `(:background
+         (propertize " " 'face `(:background
+                                 ,cur-state-color
+                                 :foreground
+                                 ,text-color))
+         ;;(sml-modeline-create)
+         (propertize (nyan-create) 'face `(:background
                                            ,cur-state-color
                                            :foreground
                                            ,text-color))
-         (propertize "  "
+         (propertize "   "
                      'face `(:background
                              ,cur-state-color
                              :foreground
