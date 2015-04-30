@@ -27,7 +27,7 @@
          (shell-command-to-string "git rev-parse --abbrev-ref HEAD")
          0 -1)))
 
-(add-hook 'focus-in-hook #'set-branch-name)
+(add-hook 'after-change-major-mode-hook #'set-branch-name)
 
 (provide 'git-modeline)
 ;;; git-modeline.el ends here
