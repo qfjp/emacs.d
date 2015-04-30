@@ -11,7 +11,7 @@
   "Get the name of the current git branch (or nil if not versioned)."
   (cond
    ((equalp (call-process-shell-command "git rev-parse --git-dir") 0)
-    (set-branch-name)
+    ;(set-branch-name)
     (setq git-branch-msg
           (concat
            "  "
@@ -26,6 +26,8 @@
         (substring
          (shell-command-to-string "git rev-parse --abbrev-ref HEAD")
          0 -1)))
+
+(add-hook 'focus-in-hook #'set-branch-name)
 
 (provide 'git-modeline)
 ;;; git-modeline.el ends here
