@@ -126,6 +126,18 @@
   (evil-leader/set-key "SPC"
     'evil-search-highlight-persist-remove-all))
 
+(use-package evil-surround
+  :ensure t
+  :demand evil
+  :init
+  (global-evil-surround-mode t))
+
+(use-package evil-numbers
+  :ensure t
+  :demand evil
+  :config
+  (global-set-key (kbd "C-a") 'evil-numbers/inc-at-pt))
+
 (use-package evil
   :ensure t
   :commands (evil)
