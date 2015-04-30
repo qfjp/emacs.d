@@ -53,16 +53,43 @@
 
 (setq-default
  normal-face
- `(:foreground ,text-color :background ,normal-color :height 0.9 :weight bold))
+ `(:foreground
+   ,text-color
+   :background
+   ,normal-color
+   :height
+   0.9
+   :weight bold))
 (setq-default
  insert-face
- `(:foreground ,text-color :background ,insert-color :height 0.9 :weight bold))
+ `(:foreground
+   ,text-color
+   :background
+   ,insert-color
+   :height
+   0.9
+   :weight
+   bold))
 (setq-default
  visual-face
- `(:foreground ,text-color :background ,visual-color :height 0.9 :weight bold))
+ `(:foreground
+   ,text-color
+   :background
+   ,visual-color
+   :height
+   0.9
+   :weight
+   bold))
 (setq-default
  replace-face
- `(:foreground ,text-color :background ,replace-color :height 0.9 :weight bold))
+ `(:foreground
+   ,text-color
+   :background
+   ,replace-color
+   :height
+   0.9
+   :weight
+   bold))
 
 (defvar new-fore)
 (defvar new-back)
@@ -136,7 +163,8 @@
     (setq new-back main-section-back-color))
    ((equalp sep-indicator "optional")
     (setq new-back optional-section-back-color)))
-  (propertize (char-to-string ?\ue0b0) 'face `(:foreground ,new-fore :background ,new-back)))
+  (propertize (char-to-string ?\ue0b0)
+              'face `(:foreground ,new-fore :background ,new-back)))
 
 (defun make-left-separator (face)
   "Given a FACE plist, make the appropriate separator."
@@ -148,7 +176,8 @@
     )
    )
   (setq new-back (plist-get face :background))
-  (propertize (char-to-string ?\ue0b2) 'face `(:foreground ,new-fore :background ,new-back)))
+  (propertize (char-to-string ?\ue0b2)
+              'face `(:foreground ,new-fore :background ,new-back)))
 
 (defun refresh-encoding-msg ()
   "Return the encoding section."
