@@ -34,6 +34,11 @@
 ;; Emacs evil will use c-u to scroll
 (setq evil-want-C-u-scroll t)
 
+;; Show trailing whitespace
+(setq whitespace-style '(face trailing tabs tab-mark))
+(global-whitespace-mode t)
+(setq-default show-trailing-whitespace t)
+
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
 
