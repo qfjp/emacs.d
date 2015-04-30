@@ -22,7 +22,25 @@
 (defvar replace-color)
 (defvar cur-state-color)
 (defvar text-color)
+(defvar main-foreground)
 
+;; colors
+(defvar optional-normal-bg)
+(setq optional-normal-bg "#454545")
+(defvar optional-dark-bg)
+(setq optional-dark-bg "black")
+
+(defvar main-section-back-color)
+(setq main-section-back-color "#2f2f2f")
+
+(defvar optional-section-back-color)
+(setq optional-section-back-color optional-normal-bg)
+
+(defvar normal-face)
+(defvar insert-face)
+(defvar visual-face)
+(defvar replace-face)
+(defvar optional-face)
 
 (defun refresh-colors ()
   "Set colors based on whether we are in a GUI or tty."
@@ -32,6 +50,7 @@
   (setq visual-color "orange")
   (setq replace-color "red")
   (setq cur-state-color "blue")
+  (setq main-foreground "gray96")
   (if window-system
       (progn
         (setq normal-color "#6a95b5")
@@ -41,54 +60,64 @@
 
 (defun refresh-faces ()
   "Refresh the faces for the evil state."
-  (setq-default
-   normal-face
-   `(:foreground
-     ,text-color
-     :background
-     ,normal-color
-     :height
-     0.9
-     :weight bold))
-  (setq-default
-   insert-face
-   `(:foreground
-     ,text-color
-     :background
-     ,insert-color
-     :height
-     0.9
-     :weight
-     bold))
-  (setq-default
-   visual-face
-   `(:foreground
-     ,text-color
-     :background
-     ,visual-color
-     :height
-     0.9
-     :weight
-     bold))
-  (setq-default
-   replace-face
-   `(:foreground
-     ,text-color
-     :background
-     ,replace-color
-     :height
-     0.9
-     :weight
-     bold)))
+  (cond
+   ((or (evil-insert-state-p) (evil-visual-state-p))
+    (setq optional-section-back-color optional-dark-bg)
+    (setq optional-face
+          `(:foreground
+            ,cur-state-color
+            :background
+            ,optional-section-back-color
+            :height
+            0.9)))
+   (t
+    (setq optional-section-back-color optional-normal-bg)
+    (setq optional-face
+          `(:foreground
+            ,main-foreground
+            :background
+            ,optional-section-back-color
+            :height
+            0.9))))
+
+  (setq normal-face
+        `(:foreground
+          ,text-color
+          :background
+          ,normal-color
+          :height
+          0.9
+          :weight bold))
+  (setq insert-face
+        `(:foreground
+          ,text-color
+          :background
+          ,insert-color
+          :height
+          0.9
+          :weight
+          bold))
+  (setq visual-face
+        `(:foreground
+          ,text-color
+          :background
+          ,visual-color
+          :height
+          0.9
+          :weight
+          bold))
+  (setq replace-face
+        `(:foreground
+          ,text-color
+          :background
+          ,replace-color
+          :height
+          0.9
+          :weight
+          bold)))
 
 (refresh-colors)
 (refresh-faces)
-
-(defvar normal-face)
-(defvar insert-face)
-(defvar visual-face)
-(defvar replace-face)
-
 
 ;; Mode line info vars
 (defvar evil-state-msg)
@@ -106,20 +135,6 @@
   "The scrollbar text widget.")
 
 ;; Indicate the state of the last separator
-(defvar sep-indicator)
-(setq-default sep-indicator "orig")
-
-;; colors
-(defvar optional-section-back-color)
-(setq optional-section-back-color "#454545")
-(defvar main-section-back-color)
-(setq main-section-back-color "#2f2f2f")
-(defvar encoding-section-back-color)
-(setq encoding-section-back-color "#454545")
-
-
-(defvar new-fore)
-(defvar new-back)
 (require 'text-scroll-bar)
 
 ;; Main hook
@@ -127,35 +142,31 @@
   "Return the state of evil mode."
   (refresh-colors)
   (refresh-faces)
-  (setq new-back optional-section-back-color)
   (cond
    ((evil-normal-state-p)
     (setq cur-state-color normal-color)
     (setq evil-state-msg
           (concat (propertize " NORMAL " 'face normal-face)
-                  (make-right-separator normal-face))))
+                  (make-right-separator optional-section-back-color normal-color))))
    ((evil-insert-state-p)
     (setq cur-state-color insert-color)
     (setq evil-state-msg
           (concat (propertize " INSERT " 'face insert-face)
-                  (make-right-separator insert-face))))
+                  (make-right-separator optional-section-back-color insert-color))))
    ((evil-visual-state-p)
     (setq cur-state-color visual-color)
     (setq evil-state-msg
           (concat (propertize " VISUAL " 'face visual-face)
-                  (make-right-separator visual-face))))
+                  (make-right-separator optional-section-back-color visual-color))))
    ((evil-replace-state-p)
     (setq cur-state-color replace-color)
     (setq evil-state-msg
           (concat (propertize " REPLACE " 'face replace-face)
-                  (make-right-separator replace-face)))))
-  (setq sep-indicator "state")
+                  (make-right-separator optional-section-back-color replace-color)))))
+  (refresh-faces)
   (refresh-optional-state-msg)
-  (setq sep-indicator "optional")
   (refresh-buffer-name-msg)
-  (setq sep-indicator "mode")
   (refresh-major-mode-msg)
-  (setq sep-indicator "encoding")
   (refresh-encoding-msg)
   (refresh-ruler-msg)
   (refresh-left-right-buffer))
@@ -167,7 +178,7 @@
    (concat
     (propertize (concat "  " mode-name " ")
                 'face `(:background ,main-section-back-color))
-    (make-left-separator `(:background ,main-section-back-color)))))
+    (make-left-separator main-section-back-color optional-section-back-color))))
 
 (defun refresh-buffer-name-msg ()
   "Give an indicator for the current file."
@@ -178,29 +189,15 @@
                      `(:background ,main-section-back-color))
          (propertize " %b " 'face '(:background "black")))))
 
-(defun make-right-separator (face)
-  "Given a FACE plist, make the appropriate separator."
-  (setq new-fore (plist-get face :background))
-  (cond
-   ((equalp sep-indicator "state")
-    (setq new-back main-section-back-color))
-   ((equalp sep-indicator "optional")
-    (setq new-back optional-section-back-color)))
+(defun make-right-separator (bg fg)
+  "Given colors BG and FG, make the appropriate separator."
   (propertize (char-to-string ?\ue0b0)
-              'face `(:foreground ,new-fore :background ,new-back)))
+              'face `(:foreground ,fg :background ,bg)))
 
-(defun make-left-separator (face)
+(defun make-left-separator (bg fg)
   "Given a FACE plist, make the appropriate separator."
-  (cond
-   ((equalp sep-indicator "mode")
-    (setq new-fore encoding-section-back-color))
-   ((equalp sep-indicator "encoding")
-    (setq new-fore cur-state-color)
-    )
-   )
-  (setq new-back (plist-get face :background))
   (propertize (char-to-string ?\ue0b2)
-              'face `(:foreground ,new-fore :background ,new-back)))
+              'face `(:foreground ,fg :background ,bg)))
 
 (defun refresh-encoding-msg ()
   "Return the encoding section."
@@ -209,20 +206,11 @@
          (propertize
           (concat " " (symbol-name buffer-file-coding-system) " ")
           'face
-          `(:background ,encoding-section-back-color))
-         (make-left-separator
-          `(:background ,encoding-section-back-color)))))
+          optional-face)
+         (make-left-separator optional-section-back-color cur-state-color))))
 
 (defun refresh-ruler-msg ()
   "Set the value of the ruler message."
-  ;;(setq-default
-  ;; face-remapping-alist
-  ;; `(
-  ;;   (sml-modeline-end-face :foreground ,text-color
-  ;;                          :background ,cur-state-color
-  ;;                          :weight bold)
-  ;;   (sml-modeline-vis-face :weight bold)
-  ;;   ))
   (setq-default nyan-bar-length 10)
   (setq-default nyan-cat-face-number 1)
   (setq-default nyan-wavy-trail t)
@@ -254,17 +242,12 @@
                                     ,text-color)))))
 
 (defun refresh-optional-state-msg ()
-  "Return an optional second state." 
+  "Return an optional second state."
   (setq optional-state-msg
         (concat
          (propertize (get-git-branch) 'face
-                     `(:background ,optional-section-back-color
-                       :height 0.9))
-         (make-right-separator
-          `(:foreground "gray19"
-                        :background ,optional-section-back-color
-                        :height 0.9
-                        :weight bold)))))
+                     optional-face)
+         (make-right-separator "gray19" optional-section-back-color))))
 
 (defadvice evil-refresh-mode-line (after refresh-evil-state-msg activate)
     "Update the indicator for the modeline state."
