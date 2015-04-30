@@ -50,7 +50,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("da457c503896491c5ae46c416fa0f5f1d6f67f89b939b8ae94888c95f8f58ecd"))))
+    ("9f3a4edb56d094366afed2a9ba3311bbced0f32ca44a47a765d8ef4ce5b8e4ea")))
+ '(when (not (facep (aref ansi-term-color-vector 0)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -60,7 +61,6 @@
  '(linum ((t (:background "gray19" :foreground "#e0e0e0"))))
  '(linum-relative-current-face ((t (:inherit linum :background "color-18" :foreground "#CAE682" :weight bold))))
  '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
-(load-theme 'base16-default-dark)
 
 ;; Paren matching
 (electric-pair-mode t)
@@ -97,6 +97,29 @@
   :demand key-chord
   :demand evil
   :init
+;; theme
+(use-package base16-theme
+  :ensure t
+  :init
+  (load-theme 'base16-default-dark))
+
+;; Rainbow delimiter
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;; Guide key
+
+;; Auctex
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(setq TeX-view-program-selection
+      '((output-pdf "PDF Viewer")))
+(setq TeX-view-program-list
+      '(("PDF Viewer" "zathura %o")))
+
   (key-chord-mode 1)
   :config
   (key-chord-define-global "jk" 'evil-normal-state))
