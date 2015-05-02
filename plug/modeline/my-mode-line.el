@@ -263,6 +263,29 @@
 (defvar mode-line-left "" "The left mode line message.")
 (defvar mode-line-right "" "The right mode line message.")
 
+(defvar truncate-depth nil "Whether the mode-line has to be truncated.")
+
+(defvar-local ml/fudge-val -4)
+
+(defun calculate-buffer-width ()
+  "Calculate the number of spaces between left and right."
+  (when (display-graphic-p)
+    (setq ml/fudge-val -16))
+  (setq num-spaces (- (window-width)
+     (+ (string-width (format-mode-line mode-line-left))
+        (string-width (format-mode-line mode-line-right)))
+     ml/fudge-val ;; quick hack to fill out buffer in console
+     ))
+  num-spaces)
+  ;;(cond
+  ;; ((< num-spaces 0)
+  ;;  (progn
+  ;;    (setq truncate-depth (+ 1 truncate-depth))))
+  ;; ((> num-spaces 10)
+  ;;  (progn
+  ;;    (setq truncate-depth (- 1 truncate-depth))) ;; TODO needs to be more specific
+  ;;  )
+  ;; (t num-spaces)))
 
 (defun refresh-left-msg ()
   "Set the left portion of the mode-line."
@@ -288,18 +311,12 @@
    ((equalp length 0) accum)
    (t (write-spaces (- length 1) (concat accum " ")))))
 
-(defvar-local ml/fudge-val -4)
+
 (defun refresh-left-right-buffer ()
   "Set the size of the gap between the left and right messages."
-  (when (display-graphic-p)
-    (setq ml/fudge-val -16))
   (setq left-right-buffer
         (write-spaces
-         (- (window-width)
-            (+ (string-width (format-mode-line mode-line-left))
-               (string-width (format-mode-line mode-line-right)))
-            ml/fudge-val ;; quick hack to fill out buffer in console
-            )
+         (calculate-buffer-width)
          "")))
 
 (defun refresh-mode-line (&optional arg arg2 arg3)
