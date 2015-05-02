@@ -147,22 +147,26 @@
     (setq cur-state-color normal-color)
     (setq evil-state-msg
           (concat (propertize " NORMAL " 'face normal-face)
-                  (make-right-separator optional-section-back-color normal-color))))
+                  (make-right-separator
+                   optional-section-back-color normal-color))))
    ((evil-insert-state-p)
     (setq cur-state-color insert-color)
     (setq evil-state-msg
           (concat (propertize " INSERT " 'face insert-face)
-                  (make-right-separator optional-section-back-color insert-color))))
+                  (make-right-separator
+                   optional-section-back-color insert-color))))
    ((evil-visual-state-p)
     (setq cur-state-color visual-color)
     (setq evil-state-msg
           (concat (propertize " VISUAL " 'face visual-face)
-                  (make-right-separator optional-section-back-color visual-color))))
+                  (make-right-separator
+                   optional-section-back-color visual-color))))
    ((evil-replace-state-p)
     (setq cur-state-color replace-color)
     (setq evil-state-msg
           (concat (propertize " REPLACE " 'face replace-face)
-                  (make-right-separator optional-section-back-color replace-color)))))
+                  (make-right-separator
+                   optional-section-back-color replace-color)))))
   (refresh-faces)
   (refresh-optional-state-msg)
   (refresh-buffer-name-msg)
@@ -178,7 +182,8 @@
    (concat
     (propertize (concat "  " mode-name " ")
                 'face `(:background ,main-section-back-color))
-    (make-left-separator main-section-back-color optional-section-back-color))))
+    (make-left-separator
+     main-section-back-color optional-section-back-color))))
 
 (defun refresh-buffer-name-msg ()
   "Give an indicator for the current file."
@@ -207,7 +212,8 @@
           (concat " " (symbol-name buffer-file-coding-system) " ")
           'face
           optional-face)
-         (make-left-separator optional-section-back-color cur-state-color))))
+         (make-left-separator
+          optional-section-back-color cur-state-color))))
 
 (defun refresh-ruler-msg ()
   "Set the value of the ruler message."
@@ -247,7 +253,8 @@
         (concat
          (propertize (get-git-branch) 'face
                      optional-face)
-         (make-right-separator "gray19" optional-section-back-color))))
+         (make-right-separator
+          "gray19" optional-section-back-color))))
 
 (defadvice evil-refresh-mode-line (after refresh-evil-state-msg activate)
     "Update the indicator for the modeline state."
