@@ -272,7 +272,7 @@ This will be a section on the left of the status bar."
             #'refresh-mode-line)
 
 (add-hook 'window-scroll-functions #'refresh-mode-line)
-(add-hook 'after-change-major-mode-hook #'refresh-mode-line)
+;(add-hook 'after-change-major-mode-hook #'refresh-mode-line)
 
 (provide 'my-mode-line)
 ;;; my-mode-line.el ends here
