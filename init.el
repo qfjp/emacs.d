@@ -115,26 +115,27 @@
 ;;             (cons my-marker-hs-info hs-special-modes-alist))))
 ;; (setq hs-hide-comments-when-hiding-all nil)
 
- (defun my-setup-folding-by-marks ()
-   "Setup folding based on markers."
-   (load "folding" 'nomessage 'noerror)
-   (folding-mode-add-find-file-hook)
-   (folding-add-to-marks-list 'sh-mode "# {{{" "# }}}")
+(defun my-setup-folding-by-marks ()
+  "Setup folding based on markers."
+  (load "folding" 'nomessage 'noerror)
+  (folding-mode-add-find-file-hook)
+  (folding-add-to-marks-list 'sh-mode "# {{{" "# }}}")
 
-   ;; Provide a new MAJORMODE-local-vars-hook
-   (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
-   (defun run-local-vars-mode-hook ()
-     "Run a hook for the major-mode after the local variables have been processed."
-     (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
-   ;; Use our new hook as required
-   (add-hook 'sh-mode-local-vars-hook
-             (lambda ()
-               (if folded-file
-                   (progn
-                     (define-key evil-normal-state-local-map (kbd "zo")
-                       'folding-show-current-entry)
-                     (define-key evil-normal-state-local-map (kbd "zc")
-                       'folding-hide-current-entry))))))
+  (defun my-change-fold-keymaps ()
+    (if folded-file
+        (progn
+          (define-key evil-normal-state-local-map (kbd "z[")
+            'folding-open-buffer)
+          (define-key evil-normal-state-local-map (kbd "z]")
+            'folding-whole-buffer)
+          (define-key evil-normal-state-local-map (kbd "zo")
+            'folding-show-current-entry)
+          (define-key evil-normal-state-local-map (kbd "zc")
+            'folding-hide-current-entry))))
+  (defadvice folding-mode (after folding-mode activate)
+    (my-change-fold-keymaps))
+  (ad-activate 'folding-mode)
+   )
 
 ;; theme
 (use-package base16-theme
