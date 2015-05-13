@@ -131,9 +131,9 @@
              (lambda ()
                (if folded-file
                    (progn
-                     (define-key evil-normal-state-map (kbd "zo")
+                     (define-key evil-normal-state-local-map (kbd "zo")
                        'folding-show-current-entry)
-                     (define-key evil-normal-state-map (kbd "zc")
+                     (define-key evil-normal-state-local-map (kbd "zc")
                        'folding-hide-current-entry))))))
 
 ;; theme
