@@ -252,5 +252,10 @@
     (evil-mode 1)))
 (require 'my-mode-line)
 
+;; Undo tree history
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist
+      '(("." . "~/.emacs.d/undo_hist")))
+
 (provide 'init)
 ;;; init.el ends here
