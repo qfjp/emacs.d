@@ -47,6 +47,15 @@
 (setq-default save-place t)
 (require 'saveplace)
 
+
+;; Zsh syntax highlighting
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\zshrc\\'" . sh-mode))
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (if (string-match "\\.zsh$" buffer-file-name)
+                (sh-set-shell "zsh"))))
+
 ;; Theme
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
