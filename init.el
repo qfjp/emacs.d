@@ -65,6 +65,7 @@
  '(custom-safe-themes
    (quote
     ("9f3a4edb56d094366afed2a9ba3311bbced0f32ca44a47a765d8ef4ce5b8e4ea")))
+ '(safe-local-variable-values (quote ((folded-file . t))))
  '(when (not (facep (aref ansi-term-color-vector 0)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
