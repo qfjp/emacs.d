@@ -97,6 +97,35 @@
 (require 'my-magit)
 (require 'my-ido)
 
+;; ;; hideshow
+;; (require 'hideshowvis)
+;; (let ((my-marker-hs-info '(sh-mode "#{{{" "#}}}" nil nil nil)))
+;;   (if (not (member my-marker-hs-info hs-special-modes-alist))
+;;       (setq hs-special-modes-alist
+;;             (cons my-marker-hs-info hs-special-modes-alist))))
+;; (setq hs-hide-comments-when-hiding-all nil)
+
+ (defun my-setup-folding-by-marks ()
+   "Setup folding based on markers."
+   (load "folding" 'nomessage 'noerror)
+   (folding-mode-add-find-file-hook)
+   (folding-add-to-marks-list 'sh-mode "# {{{" "# }}}")
+
+   ;; Provide a new MAJORMODE-local-vars-hook
+   (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+   (defun run-local-vars-mode-hook ()
+     "Run a hook for the major-mode after the local variables have been processed."
+     (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+   ;; Use our new hook as required
+   (add-hook 'sh-mode-local-vars-hook
+             (lambda ()
+               (if folded-file
+                   (progn
+                     (define-key evil-normal-state-map (kbd "zo")
+                       'folding-show-current-entry)
+                     (define-key evil-normal-state-map (kbd "zc")
+                       'folding-hide-current-entry))))))
+
 ;; theme
 (use-package base16-theme
   :ensure t
@@ -201,6 +230,8 @@
       'swbuff-switch-to-previous-buffer)
     (define-key evil-normal-state-map (kbd ";") 'evil-ex)
     (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
+
+    (my-setup-folding-by-marks)
     ;;(add-hook 'evil-insert-state-entry-hook (lambda () (linum-mode -1)))
     ;;(add-hook 'evil-insert-state-exit-hook (lambda () (linum-mode)))
     (my-dired-evil-keymaps)
