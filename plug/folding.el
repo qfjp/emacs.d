@@ -40,7 +40,6 @@
 ;;}}}
 
 ;;; Commentary:
-
 ;;{{{ Introduction
 
 ;; Preface
@@ -78,6 +77,7 @@
 ;;      or imenu.el (which can parse the function indexes)
 
 ;;}}}
+
 ;;{{{ Installation
 
 ;;  Installation
@@ -122,6 +122,7 @@
 ;;      `finder-commentary' RET folding RET.
 
 ;;}}}
+
 ;;{{{ DOCUMENTATION
 
 ;;  Compatibility
@@ -405,6 +406,7 @@
 ;;      loading this package.
 
 ;;}}}
+
 ;;{{{ Examples
 
 ;;  Example: personal setup
@@ -548,6 +550,7 @@
 ;;      the XEmacs people I you can reproduce it.
 
 ;;}}}
+
 ;;{{{ Old Documentation
 
 ;;  Old documentation
@@ -1821,6 +1824,7 @@ with XEmacs.")
   "Version number of folding.el.")
 
 ;;}}}
+
 ;;{{{ setup: bind
 
 ;;; .......................................................... &v-bind ...
@@ -2127,6 +2131,7 @@ The default is C - c @"
   "Name of pull down menu.")
 
 ;;}}}
+
 ;;{{{ setup: hooks
 
 ;;; ......................................................... &v-hooks ...
@@ -2146,6 +2151,7 @@ started in C mode."
   :group 'folding)
 
 ;;}}}
+
 ;;{{{ setup: user config
 
 ;;; ........................................................ &v-Config ...
@@ -2257,6 +2263,7 @@ Use function `folding-set-local-variables' if you change the current mode's
 folding marks during the session.")
 
 ;;}}}
+
 ;;{{{ setup: private
 
 ;;; ....................................................... &v-private ...
@@ -2308,6 +2315,7 @@ too highly for selective display to make the change worthwhile."
   :group 'folding)
 
 ;;}}}
+
 ;;{{{ Folding install
 
 (defun folding-easy-menu-define ()
@@ -2423,6 +2431,7 @@ too highly for selective display to make the change worthwhile."
         (turn-off-folding-mode)))))
 
 ;;}}}
+
 ;;{{{ code: misc
 
 (defsubst folding-get-mode-marks (&optional mode)
@@ -2633,6 +2642,7 @@ Point must be over beginning fold mark."
         (message (format "fold:%s" name)))))
 
 ;;}}}
+
 ;;{{{ code: events
 
 (defun folding-event-posn (act event)
@@ -2745,6 +2755,7 @@ When used on XEmacs, return nil if no character was under the mouse."
     (folding-install-hooks)))
 
 ;;}}}
+
 ;;{{{ code: Mouse handling
 
 (defun folding-mouse-call-original (&optional event)
@@ -2915,6 +2926,7 @@ taken."
       (folding-mouse-call-original event)))))
 
 ;;}}}
+
 ;;{{{ code: engine
 
 (defun folding-set-mode-line ()
@@ -3336,6 +3348,7 @@ Mouse behavior
       (easy-menu-remove folding-mode-menu))))
 
 ;;}}}
+
 ;;{{{ code: setting fold marks
 
 ;; You think those "\\(\\)" pairs are peculiar?  Me too. Emacs regexp
@@ -3385,6 +3398,7 @@ mark variables directly."
                "[ \t]*\\(\\)\\($\\|\r\\)\\)\\)")))
 
 ;;}}}
+
 ;;{{{ code: movement
 
 (defun folding-next-visible-heading (&optional direction)
@@ -3677,6 +3691,7 @@ visible. This is useful after some commands eg., search commands."
 	(widen)))))
 
 ;;}}}
+
 ;;{{{ folding-shift-out
 
 (defun folding-shift-out (&optional event)
@@ -3710,6 +3725,7 @@ visible. This is useful after some commands eg., search commands."
   (folding-set-mode-line))
 
 ;;}}}
+
 ;;{{{ folding-show-current-entry
 
 (defun folding-show-current-entry (&optional event noerror noskip)
@@ -3776,6 +3792,7 @@ subfolds."
       (goto-char point))))
 
 ;;}}}
+
 ;;{{{ folding-hide-current-entry
 
 (defun folding-toggle-enter-exit ()
@@ -3818,6 +3835,7 @@ Undo effect of `folding-show-current-entry'."
       (error "Not on a fold"))))
 
 ;;}}}
+
 ;;{{{ folding-show-all
 
 (defun folding-show-all ()
@@ -3847,6 +3865,7 @@ Undo effect of `folding-show-current-entry'."
 ;;}}}
 
 ;;}}}
+
 ;;{{{ code: Searching for fold boundaries
 
 ;;{{{ folding-skip-folds
@@ -3973,6 +3992,7 @@ maintained to avoid an unnecessary search at the next iteration."
 ;;}}}
 
 ;;}}}
+
 ;;{{{ code: Functions that actually modify the buffer
 
 ;;{{{ folding-fold-region
@@ -4021,6 +4041,7 @@ The fold markers are intended according to mode."
   (save-excursion (folding-tidy-inside)))
 
 ;;}}}
+
 ;;{{{ folding-tidy-inside
 
 ;; Note to self: The long looking code for checking and modifying those
@@ -4099,6 +4120,7 @@ there already. The amount of space left depends on the variable
 ;;}}}
 
 ;;}}}
+
 ;;{{{ code: Operations on the whole buffer
 
 ;;{{{ folding-whole-buffer
@@ -4790,6 +4812,7 @@ nil means discard it; anything else is stream for print."
   "List of isearch commands which exits search string edit.")
 
 ;;}}}
+
 ;;{{{ Keymaps (an Isearch hook)
 
 (defvar folding-isearch-mode-map nil
@@ -4865,6 +4888,7 @@ nil means discard it; anything else is stream for print."
   (add-hook 'isearch-mode-end-hook 'folding-isearch-end-hook-function))
 
 ;;}}}
+
 ;;{{{ Normal search routines
 
 ;; Generate the replacement functions of the form:
@@ -4912,6 +4936,7 @@ nil means discard it; anything else is stream for print."
         (signal 'quit '(isearch)))))
 
 ;;}}}
+
 ;;{{{ Edit search string support
 
 (defvar folding-isearch-current-buffer nil
@@ -4987,6 +5012,7 @@ nil means discard it; anything else is stream for print."
   (isearch-nonincremental-exit-minibuffer))
 
 ;;}}}
+
 ;;{{{ Special XEmacs support
 
 ;; In XEmacs, all isearch commands must have the property `isearch-command'.
@@ -5037,6 +5063,7 @@ nil means discard it; anything else is stream for print."
 ;;}}}
 
 ;;}}}
+
 ;;{{{ code: Additional functions
 
 (defvar folding-comment-folding-table
@@ -5352,6 +5379,7 @@ The result will be:
             (insert right "\n")))))))
 
 ;;}}}
+
 ;;{{{ code: Overlay support
 
 (defun folding-use-overlays-p ()
@@ -5409,6 +5437,7 @@ And from END t `point-min'. If ARG is nil, delete overlays."
       (setq folding-narrow-overlays (cons overlay-beg  overlay-end)))))
 
 ;;}}}
+
 ;;{{{ code: end of file tag, provide
 
 (folding-install)
@@ -5418,6 +5447,12 @@ And from END t `point-min'. If ARG is nil, delete overlays."
 
 (run-hooks 'folding-load-hook)
 
+;;}}}
+
+;;{{{
+;; Local Variables:
+;; folded-file: t
+;; End:
 ;;}}}
 
 ;;; folding.el ends here
