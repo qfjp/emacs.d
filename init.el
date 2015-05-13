@@ -248,7 +248,6 @@
     (my-package-list-evil-keymaps)
     (my-ibuffer-evil-keymaps)
     (my-magit-evil-keymaps)
-    (setq undo-tree-auto-save-history t)
     (evil-mode 1)))
 (require 'my-mode-line)
 
