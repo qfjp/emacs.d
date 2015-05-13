@@ -249,6 +249,20 @@
     (my-ibuffer-evil-keymaps)
     (my-magit-evil-keymaps)
     (evil-mode 1)))
+
+(use-package sublimity
+  :ensure t
+  :config
+  ;(require 'sublimity-scroll)
+  ;(require 'sublimity-map)
+  ;(require 'sublimity-attractive)
+  (eval-after-load 'sublimity
+    '(progn
+       (evil-set-initial-state 'sublimity-mode 'normal)
+       (evil-define-key 'normal sublimity-mode-map
+         (kbd "j") 'evil-next-line
+         (kbd "k") 'evil-previous-line)))
+  (sublimity-mode t))
 (require 'my-mode-line)
 
 ;; Undo tree history
