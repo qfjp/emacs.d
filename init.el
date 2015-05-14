@@ -271,5 +271,10 @@
 (setq undo-tree-history-directory-alist
       '(("." . "~/.emacs.d/undo_hist")))
 
+(custom-theme-set-faces
+ 'base16-default-dark
+ `(cursor ((t (:foreground "#ffffff"))))
+ )
+
 (provide 'init)
 ;;; init.el ends here
