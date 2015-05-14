@@ -49,8 +49,6 @@
 
 
 ;; Zsh syntax highlighting
-(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
-(add-to-list 'auto-mode-alist '("\\zshrc\\'" . sh-mode))
 (add-hook 'sh-mode-hook
           (lambda ()
             (if (string-match "\\.zsh$" buffer-file-name)
@@ -107,6 +105,13 @@
 (require 'my-magit)
 (require 'my-ido)
 
+;; Auto mode configuration
+(add-to-list 'load-path (concat user-emacs-directory "automodes"))
+
+(require 'my-conf-modes)
+(require 'my-sh-modes)
+(require 'my-markdown-modes)
+
 ;; ;; hideshow
 ;; (require 'hideshowvis)
 ;; (let ((my-marker-hs-info '(sh-mode "#{{{" "#}}}" nil nil nil)))
@@ -150,16 +155,6 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;; Markdown mode
-(use-package markdown-mode
-  :ensure t
-  :init
-  (autoload 'markdown-mode "markdown-mode"
-    "Major mode for editing Markdown files" t)
-  :config
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 ;; Guide key
 
 ;; Auctex
