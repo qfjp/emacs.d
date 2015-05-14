@@ -112,14 +112,6 @@
 (require 'my-sh-modes)
 (require 'my-markdown-modes)
 
-;; ;; hideshow
-;; (require 'hideshowvis)
-;; (let ((my-marker-hs-info '(sh-mode "#{{{" "#}}}" nil nil nil)))
-;;   (if (not (member my-marker-hs-info hs-special-modes-alist))
-;;       (setq hs-special-modes-alist
-;;             (cons my-marker-hs-info hs-special-modes-alist))))
-;; (setq hs-hide-comments-when-hiding-all nil)
-
 (defun my-setup-folding-by-marks ()
   "Setup folding based on markers."
   (load "folding" 'nomessage 'noerror)
@@ -140,8 +132,7 @@
   (defadvice folding-mode (after folding-mode activate)
     (my-change-fold-keymaps))
   (ad-activate 'folding-mode)
-  (add-hook 'prog-mode-hook 'hs-minor-mode)
-   )
+  (add-hook 'prog-mode-hook 'hs-minor-mode))
 
 ;; theme
 (use-package base16-theme
