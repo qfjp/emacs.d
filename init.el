@@ -135,6 +135,7 @@
   (defadvice folding-mode (after folding-mode activate)
     (my-change-fold-keymaps))
   (ad-activate 'folding-mode)
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
    )
 
 ;; theme
@@ -242,6 +243,8 @@
     (define-key evil-normal-state-map (kbd ";") 'evil-ex)
     (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
 
+    (define-key evil-normal-state-map (kbd "z[") 'hs-show-all)
+    (define-key evil-normal-state-map (kbd "z]") 'hs-hide-all)
     (my-setup-folding-by-marks)
     ;;(add-hook 'evil-insert-state-entry-hook (lambda () (linum-mode -1)))
     ;;(add-hook 'evil-insert-state-exit-hook (lambda () (linum-mode)))
