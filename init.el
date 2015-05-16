@@ -108,9 +108,16 @@
 (require 'plug/folding-toggle)
 (require 'plug/latex)
 
-(require 'automodes/my-conf-modes)
-(require 'automodes/my-sh-modes)
-(require 'automodes/my-markdown-modes)
+(require 'automodes/conf)
+(require 'automodes/sh)
+(require 'automodes/markdown)
+
+(use-package aggressive-indent
+  :ensure t
+  :init
+  (global-aggressive-indent-mode 1)
+  :config
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
 ;; theme
 (use-package base16-theme
@@ -125,20 +132,6 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (require 'plug/evil)
-
-(use-package sublimity
-  :ensure t
-  :config
-  ;(require 'sublimity-scroll)
-  ;(require 'sublimity-map)
-  ;(require 'sublimity-attractive)
-  (eval-after-load 'sublimity
-    '(progn
-       (evil-set-initial-state 'sublimity-mode 'normal)
-       (evil-define-key 'normal sublimity-mode-map
-         (kbd "j") 'evil-next-line
-         (kbd "k") 'evil-previous-line)))
-  (sublimity-mode t))
 
 (add-to-list 'load-path (concat user-emacs-directory "config/plug/modeline"))
 (require 'my-mode-line)
