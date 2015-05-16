@@ -79,6 +79,10 @@
 ;; Paren matching
 (electric-pair-mode t)
 
+;; Wrap long lines
+(progn
+  (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+  (global-visual-line-mode))
 
 ;; Keymap configurations
 (add-to-list 'load-path (concat user-emacs-directory "config"))
