@@ -43,16 +43,10 @@
 (set-frame-font "Fantasque Sans Mono-10")
 
 ;; Make emacs remember the last place in a file
-(setq save-place-file "~/.emacs.d/.place")
-(setq-default save-place t)
-(require 'saveplace)
-
-
-;; Zsh syntax highlighting
-(add-hook 'sh-mode-hook
-          (lambda ()
-            (if (string-match "\\.zsh$" buffer-file-name)
-                (sh-set-shell "zsh"))))
+(progn
+  (setq save-place-file "~/.emacs.d/.place")
+  (setq-default save-place t)
+  (require 'saveplace))
 
 ;; Theme
 (custom-set-variables
