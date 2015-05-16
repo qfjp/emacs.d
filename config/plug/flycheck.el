@@ -1,4 +1,4 @@
-;;; plug/my-flycheck.el --- Syntax checking
+;;; plug/flycheck.el --- Syntax checking
 ;;; Commentary:
 ;;; Code:
 (use-package flycheck
@@ -10,7 +10,6 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (add-hook 'python-mode-hook
             (lambda ()
-              (flycheck-select-checker 'python-pylint)))
-  )
-(provide 'plug/my-flycheck)
-;;; plug/my-flycheck.el ends here
+              (flycheck-select-checker 'python-pylint))))
+(provide 'plug/flycheck)
+;;; plug/flycheck.el ends here

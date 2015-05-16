@@ -1,4 +1,4 @@
-;;; plug/my-latex.el --- latex utility features
+;;; plug/latex.el --- latex utility features
 ;;; plugins related to LaTeX
 ;;; Commentary:
 ;;; Code:
@@ -14,5 +14,5 @@
   (setq TeX-view-program-list
         '(("PDF Viewer" "zathura %o"))))
 
-(provide 'plug/my-latex)
-;;; plug/my-latex.el ends here
+(provide 'plug/latex)
+;;; plug/latex.el ends here

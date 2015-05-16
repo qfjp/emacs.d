@@ -1,4 +1,4 @@
-;;; plug/my-package --- Setup emacs repositories
+;;; plug/package --- Setup emacs repositories
 ;;; Commentary:
 "Setup for package directories in emacs init."
 
@@ -11,5 +11,5 @@
         ("org" . "http://orgmode.org/elpa/")
         ("gnu" . "http://elpa.gnu.org/packages/")))
 
-(provide 'plug/my-package)
+(provide 'plug/package)
 ;;; plug/package.el ends here

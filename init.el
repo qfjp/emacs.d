@@ -93,20 +93,20 @@
 (require 'keymaps/magit)
 (require 'keymaps/ido)
 
-(require 'plug/my-package)
-(require 'plug/my-use-package)
-(require 'plug/my-env-setup)
-(require 'plug/my-swbuff-x)
-(require 'plug/my-helm)
-(require 'plug/my-linum)
-(require 'plug/my-company)
-(require 'plug/my-flycheck)
-(require 'plug/my-elisp-slime-nav)
-(require 'plug/my-fill-column-indicator)
-(require 'plug/my-magit)
-(require 'plug/my-ido)
-(require 'plug/my-folding)
-(require 'plug/my-latex)
+(require 'plug/package)
+(require 'plug/use-package)
+(require 'plug/env-setup)
+(require 'plug/bufcycle)
+(require 'plug/helm)
+(require 'plug/linum)
+(require 'plug/company)
+(require 'plug/flycheck)
+(require 'plug/elisp)
+(require 'plug/column)
+(require 'plug/magit)
+(require 'plug/ido)
+(require 'plug/folding-toggle)
+(require 'plug/latex)
 
 (require 'automodes/my-conf-modes)
 (require 'automodes/my-sh-modes)
@@ -124,7 +124,7 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-(require 'plug/my-evil)
+(require 'plug/evil)
 
 (use-package sublimity
   :ensure t

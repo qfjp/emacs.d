@@ -1,4 +1,4 @@
-;;; plug/my-fill-column-indicator.el --- 70 char width limit
+;;; plug/column.el --- 70 char width limit
 ;;; Commentary:
 ;;; Code:
 
@@ -33,5 +33,5 @@
     (setq sanityinc/fci-mode-suppressed nil)
     (turn-on-fci-mode)))
 
-(provide 'plug/my-fill-column-indicator)
-;;; plug/my-fill-column-indicator.el ends here
+(provide 'plug/column)
+;;; plug/column.el ends here

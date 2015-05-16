@@ -1,4 +1,4 @@
-;;; plug/my-ido.el --- ido mode?
+;;; plug/ido.el --- ido mode?
 ;;; Commentary:
 ;;; Code:
 (use-package ido
@@ -7,5 +7,5 @@
   :config
   (add-hook 'ido-minibuffer-setup-hook
             'keymaps/ido))
-(provide 'plug/my-ido)
-;;; plug/my-ido.el ends here
+(provide 'plug/ido)
+;;; plug/ido.el ends here

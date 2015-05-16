@@ -1,4 +1,4 @@
-;;; plug/my-evil.el --- EVIL EVIL EVIL
+;;; plug/evil.el --- EVIL EVIL EVIL
 ;;; Commentary:
 ;;; Code:
 (use-package key-chord
@@ -85,5 +85,5 @@
     (keymaps/magit)
     (evil-mode 1)))
 
-(provide 'plug/my-evil)
-;;; plug/my-evil.el ends here
+(provide 'plug/evil)
+;;; plug/evil.el ends here

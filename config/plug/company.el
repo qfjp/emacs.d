@@ -1,4 +1,4 @@
-;;; plug/my-company.el --- Autocompletion
+;;; plug/company.el --- Autocompletion
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
@@ -36,5 +36,5 @@
   ;;(setq company-backends
   ;;      (mapcar #'company-mode/backend-with-yas company-backends)))
   )
-(provide 'plug/my-company)
-;;; plug/my-company.el ends here
+(provide 'plug/company)
+;;; plug/company.el ends here

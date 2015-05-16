@@ -1,4 +1,4 @@
-;;; plug/my-helm.el --- Better M-x menu
+;;; plug/helm.el --- Better M-x menu
 ;;; Commentary:
 ;;; Code:
 
@@ -8,5 +8,5 @@
   :config
   (global-set-key (kbd "M-x") 'helm-M-x))
 
-(provide 'plug/my-helm)
-;;; plug/my-helm.el ends here
+(provide 'plug/helm)
+;;; plug/helm.el ends here
