@@ -261,7 +261,11 @@ This will be a section on the left of the status bar."
 
 (advice-add 'evil-next-line :after
             #'ml/refresh-mode-line)
+(advice-add 'evil-next-visual-line :after
+            #'ml/refresh-mode-line)
 (advice-add 'evil-previous-line :after
+            #'ml/refresh-mode-line)
+(advice-add 'evil-previous-visual-line :after
             #'ml/refresh-mode-line)
 (advice-add 'evil-forward-char :after
             #'ml/refresh-mode-line)
