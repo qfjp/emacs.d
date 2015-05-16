@@ -16,67 +16,62 @@
 (tty-color-define "pink" 182)
 
 ;; State vars
-(defvar normal-color)
-(defvar insert-color)
-(defvar visual-color)
-(defvar replace-color)
-(defvar cur-state-bg)
-(defvar state-fg)
-(defvar main-fg)
-(defvar main-bg)
-(setq main-bg "#2f2f2f")
+(defvar ml/normal-color)
+(defvar ml/insert-color)
+(defvar ml/visual-color)
+(defvar ml/replace-color)
+(defvar ml/cur-state-bg)
+(defvar ml/state-fg)
+(defvar ml/main-fg)
+(defvar ml/main-bg)
+(setq ml/main-bg "#2f2f2f")
 
 ;; colors
-(defvar secondary-normal-bg)
-(setq secondary-normal-bg "#454545")
-(defvar secondary-dark-bg)
-(setq secondary-dark-bg "black")
-(defvar secondary-fg)
-(setq secondary-fg "black")
+(defvar ml/secondary-normal-bg)
+(setq ml/secondary-normal-bg "#454545")
+(defvar ml/secondary-dark-bg)
+(setq ml/secondary-dark-bg "black")
+(defvar ml/secondary-fg)
+(setq ml/secondary-fg "black")
 
+(defvar ml/secondary-bg)
+(setq ml/secondary-bg ml/secondary-normal-bg)
 
-(defvar secondary-bg)
-(setq secondary-bg secondary-normal-bg)
-
-(defvar secondary-face)
-
-(defun refresh-colors ()
+(defun ml/refresh-colors ()
   "Set colors based on whether we are in a GUI or tty."
-  (setq state-fg "gray12")
-  (setq normal-color "blue")
-  (setq insert-color "green")
-  (setq visual-color "orange")
-  (setq replace-color "red")
+  (setq ml/state-fg "gray12")
+  (setq ml/normal-color "blue")
+  (setq ml/insert-color "green")
+  (setq ml/visual-color "orange")
+  (setq ml/replace-color "red")
 
-  (setq cur-state-bg "blue")
-  (setq main-fg "gray96")
+  (setq ml/cur-state-bg "blue")
+  (setq ml/main-fg "gray96")
   (if window-system
       (progn
-        (setq normal-color "#6a95b5")
-        (setq insert-color "#99cc99")
-        (setq visual-color "#d28445")
-        (setq replace-color "#ac4142")
-        (setq cur-state-bg normal-color)
+        (setq ml/normal-color "#6a95b5")
+        (setq ml/insert-color "#99cc99")
+        (setq ml/visual-color "#d28445")
+        (setq ml/replace-color "#ac4142")
+        (setq ml/cur-state-bg ml/normal-color)
         )))
 
-(refresh-colors)
+(ml/refresh-colors)
 
 ;; Mode line info vars
-(defvar evil-state-msg)
-(defvar secondary-state-msg)
-(defvar buffer-name-msg)
+(defvar ml/evil-state-msg)
+(defvar ml/secondary-state-msg)
+(defvar ml/buffer-name-msg)
 (defvar major-mode-msg nil
   "The major mode string to display.")
-(defvar encoding-msg nil
+(defvar ml/encoding-msg nil
   "The text to use for the buffer encoding.")
-(defvar ruler-msg nil
+(defvar ml/ruler-msg nil
   "The text to use for the mode-line ruler.")
-(defvar left-right-buffer nil
+(defvar ml/left-right-buffer nil
   "Size of the gap between the left and right.")
-(defvar scrollbar-msg ""
-  "The scrollbar text widget.")
 
-(defun airline/create-left-section (text fg bg nextbg &optional face-args)
+(defun ml/create-left-section (text fg bg nextbg &optional face-args)
   "Create a section with TEXT with colors FG/BG.
 This will be a section on the left of the status bar."
   (concat
@@ -87,7 +82,7 @@ This will be a section on the left of the status bar."
    (propertize (char-to-string ?\ue0b0)
                'face `(:foreground ,bg :background ,nextbg))))
 
-(defun airline/create-right-section (text fg bg prevbg &optional face-args)
+(defun ml/create-right-section (text fg bg prevbg &optional face-args)
   "Create a section with TEXT with colors FG/BG.
 This will be a section on the left of the status bar."
   (concat
@@ -99,133 +94,134 @@ This will be a section on the left of the status bar."
     (append `(:foreground ,fg :background ,bg) face-args))))
 
 ;; Refresh state
-(defun refresh-evil-state-msg ()
+(defun ml/refresh-evil-state-msg ()
   "Return the state of evil mode."
   (cond
    ((evil-normal-state-p)
-    (setq secondary-bg secondary-normal-bg)
-    (setq cur-state-bg normal-color)
-    (setq secondary-fg main-fg)
-    (setq evil-state-msg
-          (airline/create-left-section
-           "NORMAL" state-fg normal-color secondary-bg
+    (setq ml/secondary-bg ml/secondary-normal-bg)
+    (setq ml/cur-state-bg ml/normal-color)
+    (setq ml/secondary-fg ml/main-fg)
+    (setq ml/evil-state-msg
+          (ml/create-left-section
+           "NORMAL" ml/state-fg ml/normal-color ml/secondary-bg
            '(:weight bold))))
    ((evil-insert-state-p)
-    (setq secondary-bg secondary-dark-bg)
-    (setq cur-state-bg insert-color)
-    (setq secondary-fg cur-state-bg)
-    (setq evil-state-msg
-          (airline/create-left-section
-           "INSERT" state-fg insert-color secondary-bg
+    (setq ml/secondary-bg ml/secondary-dark-bg)
+    (setq ml/cur-state-bg ml/insert-color)
+    (setq ml/secondary-fg ml/cur-state-bg)
+    (setq ml/evil-state-msg
+          (ml/create-left-section
+           "INSERT" ml/state-fg ml/insert-color ml/secondary-bg
            '(:weight bold))))
    ((evil-visual-state-p)
-    (setq secondary-bg secondary-dark-bg)
-    (setq cur-state-bg visual-color)
-    (setq secondary-fg cur-state-bg)
-    (setq evil-state-msg
-          (airline/create-left-section
-           "VISUAL" state-fg visual-color secondary-bg
+    (setq ml/secondary-bg ml/secondary-dark-bg)
+    (setq ml/cur-state-bg ml/visual-color)
+    (setq ml/secondary-fg ml/cur-state-bg)
+    (setq ml/evil-state-msg
+          (ml/create-left-section
+           "VISUAL" ml/state-fg ml/visual-color ml/secondary-bg
            '(:weight bold))))
    ((evil-replace-state-p)
-    (setq secondary-bg secondary-normal-bg)
-    (setq cur-state-bg replace-color)
-    (setq evil-state-msg
-          (airline/create-left-section
-           "REPLACE" state-fg replace-color secondary-bg
+    (setq ml/secondary-bg ml/secondary-normal-bg)
+    (setq ml/cur-state-bg ml/replace-color)
+    (setq ml/evil-state-msg
+          (ml/create-left-section
+           "REPLACE" ml/state-fg ml/replace-color ml/secondary-bg
            '(:weight bold)))))
   )
 
-(defun refresh-major-mode-msg ()
+(defun ml/refresh-major-mode-msg ()
   "Give an indicator for the major mode."
   (setq
    major-mode-msg
-   (airline/create-right-section
-     mode-name main-fg main-bg main-bg)))
+   (ml/create-right-section
+     mode-name ml/main-fg ml/main-bg ml/main-bg)))
 
-(defun refresh-buffer-name-msg ()
+(defun ml/refresh-buffer-name-msg ()
   "Give an indicator for the current file."
-  (setq buffer-name-msg
+  (setq ml/buffer-name-msg
         (concat
          (propertize " "
                      'face
-                     `(:background ,main-bg))
+                     `(:background ,ml/main-bg))
          (propertize " %b " 'face '(:background "black")))))
 
-(defun refresh-encoding-msg ()
+(defun ml/refresh-encoding-msg ()
   "Return the encoding section."
-  (setq encoding-msg
-        (airline/create-right-section
+  (setq ml/encoding-msg
+        (ml/create-right-section
          (symbol-name buffer-file-coding-system)
-         secondary-fg
-         secondary-bg
-         main-bg)))
+         ml/secondary-fg
+         ml/secondary-bg
+         ml/main-bg)))
 
-(defun refresh-ruler-msg ()
+(defun ml/refresh-ruler-msg ()
   "Set the value of the ruler message."
   (setq-default nyan-bar-length 10)
   (setq-default nyan-cat-face-number 1)
   (setq-default nyan-wavy-trail t)
-  (setq ruler-msg
+  (setq ml/ruler-msg
         (concat
          " " (nyan-create) "  %3l: %3c "))
-  (setq ruler-msg (airline/create-right-section
-                   ruler-msg
-                   state-fg
-                   cur-state-bg
-                   secondary-bg)))
+  (setq ml/ruler-msg (ml/create-right-section
+                   ml/ruler-msg
+                   ml/state-fg
+                   ml/cur-state-bg
+                   ml/secondary-bg)))
 
-(defun refresh-secondary-state-msg ()
+(defun ml/refresh-secondary-state-msg ()
   "Return an secondary second state."
-  (setq secondary-state-msg
-        (airline/create-left-section (get-git-branch)
-                                     secondary-fg
-                                     secondary-bg
-                                     main-bg)))
+  (setq ml/secondary-state-msg
+        (ml/create-left-section (get-git-branch)
+                                     ml/secondary-fg
+                                     ml/secondary-bg
+                                     ml/main-bg)))
 
-(defadvice evil-refresh-mode-line (after refresh-evil-state-msg activate)
+(defadvice ml/evil-refresh-mode-line
+    (after ml/refresh-evil-state-msg activate)
   "Update the indicator for the modeline state."
-  (refresh-evil-state-msg)
-  (refresh-secondary-state-msg)
-  (refresh-buffer-name-msg)
-  (refresh-major-mode-msg)
-  (refresh-encoding-msg)
-  (refresh-ruler-msg))
+  (ml/refresh-evil-state-msg)
+  (ml/refresh-secondary-state-msg)
+  (ml/refresh-buffer-name-msg)
+  (ml/refresh-major-mode-msg)
+  (ml/refresh-encoding-msg)
+  (ml/refresh-ruler-msg))
 
-(defvar mode-line-left "" "The left mode line message.")
-(defvar mode-line-right "" "The right mode line message.")
+(defvar ml/mode-line-left "" "The left mode line message.")
+(defvar ml/mode-line-right "" "The right mode line message.")
 
-(defvar truncate-depth nil "Whether the mode-line has to be truncated.")
+(defvar ml/truncate-depth nil "Whether the mode-line has to be truncated.")
 
 (defvar-local ml/fudge-val -4)
 
-(defun calculate-buffer-width ()
+(defun ml/calculate-buffer-width ()
   "Calculate the number of spaces between left and right."
   (when (display-graphic-p)
     (setq ml/fudge-val -16))
   (setq num-spaces (- (window-width)
-     (+ (string-width (format-mode-line mode-line-left))
-        (string-width (format-mode-line mode-line-right)))
+     (+ (string-width (format-mode-line ml/mode-line-left))
+        (string-width (format-mode-line ml/mode-line-right)))
      ml/fudge-val ;; quick hack to fill out buffer in console
      ))
   num-spaces)
 
-(defun refresh-left-msg ()
+(defun ml/refresh-left-msg ()
   "Set the left portion of the mode-line."
   (setq-default
-   mode-line-left
+   ml/mode-line-left
    (list
-    '(:eval evil-state-msg)
-    '(:eval secondary-state-msg)
-    '(:eval buffer-name-msg))))
+    '(:eval ml/evil-state-msg)
+    '(:eval ml/secondary-state-msg)
+    '(:eval ml/buffer-name-msg))))
 
-(defun refresh-right-msg ()
+(defun ml/refresh-right-msg ()
   "Set the right portion of the mode-line."
   (setq-default
-   mode-line-right
+   ml/mode-line-right
    (list
     '(:eval major-mode-msg)
-    '(:eval encoding-msg)
-    '(:eval ruler-msg))))
+    '(:eval ml/encoding-msg)
+    '(:eval ml/ruler-msg))))
 
 (defun write-spaces (length accum)
   "Writes LENGTH number of spaces to the accumulator ACCUM."
@@ -234,44 +230,44 @@ This will be a section on the left of the status bar."
    (t (write-spaces (- length 1) (concat accum " ")))))
 
 
-(defun refresh-left-right-buffer ()
+(defun ml/refresh-left-right-buffer ()
   "Set the size of the gap between the left and right messages."
-  (setq left-right-buffer
+  (setq ml/left-right-buffer
         (write-spaces
-         (calculate-buffer-width)
+         (ml/calculate-buffer-width)
          "")))
 
-(defun refresh-mode-line (&optional arg arg2 arg3)
+(defun ml/refresh-mode-line (&optional arg arg2 arg3)
   "Refresh the whole mode line; ARG, ARG2 and ARG3 provided to satisfy scroll hooks."
-  (refresh-colors)
-  (refresh-evil-state-msg)
-  (refresh-secondary-state-msg)
-  (refresh-buffer-name-msg)
-  (refresh-major-mode-msg)
-  (refresh-encoding-msg)
-  (refresh-ruler-msg)
+  (ml/refresh-colors)
+  (ml/refresh-evil-state-msg)
+  (ml/refresh-secondary-state-msg)
+  (ml/refresh-buffer-name-msg)
+  (ml/refresh-major-mode-msg)
+  (ml/refresh-encoding-msg)
+  (ml/refresh-ruler-msg)
 
-  (refresh-left-msg)
-  (refresh-right-msg)
-  (refresh-left-right-buffer))
+  (ml/refresh-left-msg)
+  (ml/refresh-right-msg)
+  (ml/refresh-left-right-buffer))
 
 (setq-default
  mode-line-format
  (list
-  '(:eval mode-line-left)
-  '(:eval (propertize left-right-buffer 'face `(:background ,main-bg)))
-  '(:eval mode-line-right)))
+  '(:eval ml/mode-line-left)
+  '(:eval (propertize ml/left-right-buffer 'face `(:background ,ml/main-bg)))
+  '(:eval ml/mode-line-right)))
 
 (advice-add 'evil-next-line :after
-            #'refresh-mode-line)
+            #'ml/refresh-mode-line)
 (advice-add 'evil-previous-line :after
-            #'refresh-mode-line)
+            #'ml/refresh-mode-line)
 (advice-add 'evil-forward-char :after
-            #'refresh-mode-line)
+            #'ml/refresh-mode-line)
 (advice-add 'evil-backward-char :after
-            #'refresh-mode-line)
+            #'ml/refresh-mode-line)
 
-(add-hook 'window-scroll-functions #'refresh-mode-line)
+(add-hook 'window-scroll-functions #'ml/refresh-mode-line)
 ;(add-hook 'after-change-major-mode-hook #'refresh-mode-line)
 
 (provide 'my-mode-line)
