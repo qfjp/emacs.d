@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; plug/my-folding.el --- Folding ala vim
 ;;; The main function 'my-setup-folding-by-marks' automatically
 ;;; switches the default folding keys (in evil mode) to use folding.el
 ;;; Commentary:
@@ -6,7 +6,7 @@
 
 (defun my-setup-folding-by-marks ()
   "Setup folding based on markers."
-  (load "folding" 'nomessage 'noerror)
+  (load "plug/folding" 'nomessage 'noerror)
   (folding-mode-add-find-file-hook)
   (folding-add-to-marks-list 'sh-mode "# {{{" "# }}}")
 
@@ -25,6 +25,6 @@
     (my-change-fold-keymaps))
   (ad-activate 'folding-mode)
   (add-hook 'prog-mode-hook 'hs-minor-mode))
-(provide 'my-folding)
+(provide 'plug/my-folding)
 
-;;; my-folding.el ends here
+;;; plug/my-folding.el ends here

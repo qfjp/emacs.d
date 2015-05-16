@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; plug/my-magit.el --- Git utility functions
 ;;; Commentary:
 ;;; Code:
 ;; Magit
@@ -14,5 +14,5 @@
   ;;(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
   )
 
-(provide 'my-magit)
-;;; my-magit ends here
+(provide 'plug/my-magit)
+;;; plug/my-magit ends here

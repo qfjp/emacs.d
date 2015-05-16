@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; plug/my-flycheck.el --- Syntax checking
 ;;; Commentary:
 ;;; Code:
 (use-package flycheck
@@ -12,5 +12,5 @@
             (lambda ()
               (flycheck-select-checker 'python-pylint)))
   )
-(provide 'my-flycheck)
-;;; my-flycheck ends here
+(provide 'plug/my-flycheck)
+;;; plug/my-flycheck.el ends here

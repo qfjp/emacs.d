@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; plug/my-swbuff-x.el --- Buffer cycling
 ;;; Commentary:
 ;;; Code:
 (use-package swbuff-x
@@ -7,5 +7,5 @@
   :config
   (setq swbuff-exclude-buffer-regexps '("^ " "^\*.*\*")))
 
-(provide 'my-swbuff-x)
-;;; my-swbuff-x ends here
+(provide 'plug/my-swbuff-x)
+;;; plug/my-swbuff-x.el ends here

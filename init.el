@@ -79,6 +79,7 @@
 ;; Paren matching
 (electric-pair-mode t)
 
+
 ;; Keymap configurations
 (add-to-list 'load-path (concat user-emacs-directory "keymaps"))
 
@@ -88,31 +89,26 @@
 (require 'my-magit-keys)
 (require 'my-ido-keys)
 
-;; Plugin Configurations
-(add-to-list 'load-path (concat user-emacs-directory "plug"))
-(add-to-list 'load-path (concat user-emacs-directory "plug/modeline"))
+(add-to-list 'load-path (concat user-emacs-directory "config"))
 
-(require 'my-package)
-(require 'my-use-package)
-(require 'my-env-setup)
-(require 'my-swbuff-x)
-(require 'my-helm)
-(require 'my-linum)
-(require 'my-company)
-(require 'my-flycheck)
-(require 'my-elisp-slime-nav)
-(require 'my-fill-column-indicator)
-(require 'my-magit)
-(require 'my-ido)
-(require 'my-folding)
-(require 'my-latex)
+(require 'plug/my-package)
+(require 'plug/my-use-package)
+(require 'plug/my-env-setup)
+(require 'plug/my-swbuff-x)
+(require 'plug/my-helm)
+(require 'plug/my-linum)
+(require 'plug/my-company)
+(require 'plug/my-flycheck)
+(require 'plug/my-elisp-slime-nav)
+(require 'plug/my-fill-column-indicator)
+(require 'plug/my-magit)
+(require 'plug/my-ido)
+(require 'plug/my-folding)
+(require 'plug/my-latex)
 
-;; Auto mode configuration
-(add-to-list 'load-path (concat user-emacs-directory "automodes"))
-
-(require 'my-conf-modes)
-(require 'my-sh-modes)
-(require 'my-markdown-modes)
+(require 'automodes/my-conf-modes)
+(require 'automodes/my-sh-modes)
+(require 'automodes/my-markdown-modes)
 
 ;; theme
 (use-package base16-theme
@@ -126,7 +122,7 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-(require 'my-evil)
+(require 'plug/my-evil)
 
 (use-package sublimity
   :ensure t
@@ -141,6 +137,8 @@
          (kbd "j") 'evil-next-line
          (kbd "k") 'evil-previous-line)))
   (sublimity-mode t))
+
+(add-to-list 'load-path (concat user-emacs-directory "config/plug/modeline"))
 (require 'my-mode-line)
 
 ;; Undo tree history

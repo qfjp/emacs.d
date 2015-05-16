@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; automodes/my-markdown-modes.el --- Markdown automodes
 ;;; Commentary:
 ;;; Code:
 ;; Markdown mode
@@ -11,5 +11,5 @@
   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
-(provide 'my-markdown-modes)
-;;; my-markdown-modes.el ends here
+(provide 'automodes/my-markdown-modes)
+;;; automodes/my-markdown-modes.el ends here

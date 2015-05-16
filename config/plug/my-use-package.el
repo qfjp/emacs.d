@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; plug/my-use-package.el --- Auto install packages on first use
 ;;; Commentary:
 ;;; Code:
 (unless (package-installed-p 'use-package)
@@ -6,5 +6,5 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(provide 'my-use-package)
-;;; my-use-package ends here
+(provide 'plug/my-use-package)
+;;; plug/my-use-package ends here
