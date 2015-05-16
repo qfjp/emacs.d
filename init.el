@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; init.el --- Emacs initialization
 ;;; Commentary:
 
 ;;; Code:
@@ -150,8 +150,7 @@
 
 (custom-theme-set-faces
  'base16-default-dark
- `(cursor ((t (:foreground "#ffffff"))))
- )
+ `(cursor ((t (:foreground "#ffffff")))))
 
 (provide 'init)
 ;;; init.el ends here
