@@ -135,7 +135,7 @@ This will be a section on the left of the status bar."
   (setq
    major-mode-msg
    (ml/create-right-section
-     mode-name ml/main-fg ml/main-bg ml/main-bg)))
+    (format-mode-line mode-name) ml/main-fg ml/main-bg ml/main-bg)))
 
 (defun ml/refresh-buffer-name-msg ()
   "Give an indicator for the current file."
