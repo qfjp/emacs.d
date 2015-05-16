@@ -1,7 +1,7 @@
 ;;; keymaps/ido.el --- Evil keymaps for ido
 ;;; Commentary:
 ;;; Code:
-(defun keymaps/ido-evil ()
+(defun keymaps/ido ()
   "Keymaps for ido in evil mode."
   (progn
     (define-key ido-completion-map (kbd "l") 'ido-next-match)
