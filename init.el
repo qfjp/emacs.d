@@ -4,9 +4,12 @@
 ;;; Code:
 
 ;; disable menubar, toolbar, and scrollbars
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+
+;; Gui
+(progn
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0))
 
 ;; Highlight cursor mode
 (global-hl-line-mode)
@@ -16,7 +19,9 @@
 ;;(setq show-paren-style 'expression)
 
 ;; stop prompting about git symlinks
-(setq vc-follow-symlinks t)
+
+;; Open symlinks in current directory without prompting
+(setq vc-follow-symlinks nil)
 
 ;; Minibuffer persistent history
 (savehist-mode 1)
@@ -28,16 +33,18 @@
 (setq-default indent-tabs-mode nil)
 
 ;; disable backup and autosave
-(setq backup-inhibited t)
-(setq auto-save-default nil)
+(progn
+  (setq backup-inhibited t)
+  (setq auto-save-default nil))
 
 ;; Emacs evil will use c-u to scroll
 (setq evil-want-C-u-scroll t)
 
 ;; Show trailing whitespace
-(setq whitespace-style '(face trailing tabs tab-mark))
-(global-whitespace-mode t)
-(setq-default show-trailing-whitespace t)
+(progn
+  (setq whitespace-style '(face trailing tabs tab-mark))
+  (global-whitespace-mode t)
+  (setq-default show-trailing-whitespace t))
 
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
