@@ -6,6 +6,6 @@
   :init (ido-mode t)
   :config
   (add-hook 'ido-minibuffer-setup-hook
-            'my-ido-evil-keymaps))
+            'keymaps/ido))
 (provide 'plug/my-ido)
 ;;; plug/my-ido.el ends here

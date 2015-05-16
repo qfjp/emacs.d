@@ -1,7 +1,7 @@
-;;; package --- Summary
+;;; keymaps/dired.el --- Evil keymaps for dired
 ;;; Commentary:
 ;;; Code:
-(defun my-dired-evil-keymaps ()
+(defun keymaps/dired ()
   "Evil keymaps for dired-x."
   (require 'dired-x)
   (put 'dired-find-alternate-file 'disabled nil)
@@ -37,5 +37,5 @@
        (evil-define-key 'normal dired-mode-map "q"
          'kill-this-buffer))))
 
-(provide 'my-dired-keys)
-;;; my-dired-keys ends here
+(provide 'keymaps/dired)
+;;; keymaps/dired.el ends here

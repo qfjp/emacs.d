@@ -81,15 +81,13 @@
 
 
 ;; Keymap configurations
-(add-to-list 'load-path (concat user-emacs-directory "keymaps"))
-
-(require 'my-ibuffer-keys)
-(require 'my-package-list-keys)
-(require 'my-dired-keys)
-(require 'my-magit-keys)
-(require 'my-ido-keys)
-
 (add-to-list 'load-path (concat user-emacs-directory "config"))
+
+(require 'keymaps/ibuffer)
+(require 'keymaps/package-list)
+(require 'keymaps/dired)
+(require 'keymaps/magit)
+(require 'keymaps/ido)
 
 (require 'plug/my-package)
 (require 'plug/my-use-package)

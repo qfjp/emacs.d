@@ -1,7 +1,7 @@
-;;; package --- Summary
+;;; keymaps/magit --- Evil keymaps for magit
 ;;; Commentary:
 ;;; Code:
-(defun my-magit-evil-keymaps ()
+(defun keymaps/magit ()
   "Evil keymaps for magit"
   (eval-after-load 'magit
     '(progn
@@ -29,5 +29,5 @@
       (evil-define-key 'normal magit-process-mode-map
         (kbd "j") 'evil-next-line
         (kbd "k") 'evil-previous-line))))
-(provide 'my-magit-keys)
-;;; my-magit-keys ends here
+(provide 'keymaps/magit)
+;;; keymaps/magit.el ends here

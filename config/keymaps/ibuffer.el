@@ -1,7 +1,7 @@
-;;; package --- Summary
+;;; keymaps/ibuffer.el --- Evil keymaps for ibuffer
 ;;; Commentary:
 ;;; Code:
-(defun my-ibuffer-evil-keymaps ()
+(defun keymaps/ibuffer ()
   "Keymaps for ibuffer in evil mode."
   (eval-after-load 'ibuffer
     '(progn
@@ -12,5 +12,5 @@
          (kbd "k") 'evil-previous-line
          (kbd "l") 'ibuffer-visit-buffer
          (kbd "v") 'ibuffer-toggle-marks))))
-(provide 'my-ibuffer-keys)
-;;; my-ibuffer-keys ends here
+(provide 'keymaps/ibuffer)
+;;; keymaps/ibuffer ends here

@@ -1,7 +1,7 @@
-;;; package --- Summary
+;;; keymaps/package-list.el --- Evil keymaps for package list
 ;;; Commentary:
 ;;; Code:
-(defun my-package-list-evil-keymaps ()
+(defun keymaps/package-list ()
   "Keymaps for package in evil mode."
   (eval-after-load 'package
     '(progn
@@ -13,5 +13,5 @@
          (kbd "x") 'package-menu-execute
          (kbd "j") 'evil-next-line
          (kbd "k") 'evil-previous-line))))
-(provide 'my-package-list-keys)
-;;; my-package-list-keys ends here
+(provide 'keymaps/package-list)
+;;; keymaps/package-list.el ends here
