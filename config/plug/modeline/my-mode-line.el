@@ -196,13 +196,14 @@ This will be a section on the left of the status bar."
 
 (defun ml/calculate-buffer-width ()
   "Calculate the number of spaces between left and right."
-  (when (display-graphic-p)
-    (setq ml/fudge-val -16))
-  (setq num-spaces (- (window-width)
-     (+ (string-width (format-mode-line ml/mode-line-left))
-        (string-width (format-mode-line ml/mode-line-right)))
-     ml/fudge-val ;; quick hack to fill out buffer in console
-     ))
+  (let ((fudge-val ml/fudge-val))
+    (when (display-graphic-p)
+      (setq fudge-val (- fudge-val 5)))
+    (setq num-spaces (- (window-width)
+                        (+ (string-width (format-mode-line ml/mode-line-left))
+                           (string-width (format-mode-line ml/mode-line-right)))
+                        fudge-val ;; quick hack to fill out buffer in console
+                        )))
   num-spaces)
 
 (defun ml/refresh-left-msg ()
