@@ -4,6 +4,7 @@
 (use-package paredit
   :ensure t
   :ensure paredit-everywhere
+  :ensure evil-paredit
   :init
   (progn
     (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
