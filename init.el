@@ -107,6 +107,8 @@
 (require 'plug/ido)
 (require 'plug/folding-toggle)
 (require 'plug/latex)
+(require 'plug/project-search)
+(require 'plug/paredit)
 
 (require 'automodes/conf)
 (require 'automodes/sh)
@@ -130,14 +132,6 @@
   :ensure t
   :init
   (indent-guide-global-mode))
-
-(use-package projectile
-  :ensure t
-  :init
-  (projectile-global-mode))
-
-(use-package project-explorer
-  :ensure t)
 
 ;; theme
 (use-package base16-theme
