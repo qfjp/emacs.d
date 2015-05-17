@@ -119,6 +119,26 @@
   :config
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
+(use-package emmet-mode
+  :ensure t
+  :init
+  (progn
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'css-mode-hook 'emmet-mode)))
+
+(use-package indent-guide
+  :ensure t
+  :init
+  (indent-guide-global-mode))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-global-mode))
+
+(use-package project-explorer
+  :ensure t)
+
 ;; theme
 (use-package base16-theme
   :ensure t
