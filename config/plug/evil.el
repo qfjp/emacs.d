@@ -13,6 +13,9 @@
 (use-package evil-leader
   :commands (evil-leader-mode)
   :ensure t
+  :ensure paredit
+  :ensure projectile
+  :ensure project-explorer
   :demand evil-leader
   :init
   (global-evil-leader-mode)
@@ -23,6 +26,7 @@
       "w" 'save-buffer
       "q" 'kill-buffer-and-window
       "b" 'ido-switch-buffer
+      ;; projectile
       "p b" 'projectile-switch-to-buffer
       "p D" 'projectile-dired
       "p d" 'projectile-find-dir
@@ -30,6 +34,17 @@
       "p j" 'projectile-find-tag
       "p k" 'projectile-kill-buffers
       "p R" 'projectile-regenerate-tags
+      ;; paredit
+      "l j" 'paredit-forward
+      "l k" 'paredit-backward
+      "l h" 'paredit-backward-up
+      "l l" 'paredit-forward-up
+      "l r" 'paredit-raise-sexp
+      "l C" 'paredit-convolute-sexp
+      "l s" 'paredit-forward-slurp-sexp
+      "l S" 'paredit-backward-slurp-sexp
+      "l b" 'paredit-forward-barf-sexp
+      "l B" 'paredit-backward-barf-sexp
       ;;"p r" 'helm-projectile-recentf
       ;;"p s" 'helm-projectile-switch-project
       )))
