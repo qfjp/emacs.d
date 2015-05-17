@@ -99,12 +99,13 @@
                   "gj" 'evil-next-line
                   "gk" 'evil-previous-line
                   "gh" 'help-command
+                  "ge" 'eval-defun
                   "C-h" 'evil-window-left
                   "C-j" 'evil-window-down
                   "C-k" 'evil-window-up
                   "C-l" 'evil-window-right
-                  "C-n" 'swbuff-switch-to-next-buffer
-                  "C-b" 'swbuff-switch-to-previous-buffer
+                  "C-n" 'ido-switch-buffer
+                  "C-b" 'ido-switch-buffer
                   "z[" 'hs-show-all
                   "z]" 'hs-hide-all
                   ";" 'evil-ex)
