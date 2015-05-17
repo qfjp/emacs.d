@@ -19,9 +19,20 @@
   :config
   (progn
     (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key "w" 'save-buffer)
-    (evil-leader/set-key "q" 'kill-buffer-and-window)
-    (evil-leader/set-key "b" 'ido-switch-buffer)))
+    (evil-leader/set-key
+      "w" 'save-buffer
+      "q" 'kill-buffer-and-window
+      "b" 'ido-switch-buffer
+      "p b" 'projectile-switch-to-buffer
+      "p D" 'projectile-dired
+      "p d" 'projectile-find-dir
+      "p e" 'project-explorer-open
+      "p j" 'projectile-find-tag
+      "p k" 'projectile-kill-buffers
+      "p R" 'projectile-regenerate-tags
+      ;;"p r" 'helm-projectile-recentf
+      ;;"p s" 'helm-projectile-switch-project
+      )))
 
 (use-package evil-search-highlight-persist
   :commands (evil-search-highlight-persist)
