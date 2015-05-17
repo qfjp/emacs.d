@@ -11,6 +11,12 @@
   (tool-bar-mode 0)
   (scroll-bar-mode 0))
 
+;; Use primary instead of clipboard
+(progn
+  (setq x-select-enable-clipboard nil)
+  (setq x-select-enable-primary t)
+  (setq mouse-drag-copy-region t))
+
 ;; Highlight cursor mode
 (global-hl-line-mode)
 
