@@ -193,18 +193,26 @@ This will be a section on the left of the status bar."
 (defvar ml/truncate-depth nil "Whether the mode-line has to be truncated.")
 
 (defvar-local ml/fudge-val -4)
+(defvar-local fudge-mm 1)
+(defvar-local fudge-val-add 0)
+(defvar-local dpi 0)
 
+;; fudge-val is an ugly hack
 (defun ml/calculate-buffer-width ()
   "Calculate the number of spaces between left and right."
   (let ((fudge-val ml/fudge-val))
     (when (display-graphic-p)
-      (setq fudge-val (- fudge-val 5)))
+      (let ((dpi (/ (display-pixel-width) (display-mm-width)))
+            (fudge-mm 1.43))
+        (setq fudge-val-add (* fudge-mm dpi))
+        (setq fudge-val-add (floor fudge-val-add))
+        (setq fudge-val (- fudge-val fudge-val-add))))
     (setq num-spaces (- (window-width)
                         (+ (string-width (format-mode-line ml/mode-line-left))
                            (string-width (format-mode-line ml/mode-line-right)))
-                        fudge-val ;; quick hack to fill out buffer in console
-                        )))
+                        fudge-val)))
   num-spaces)
+
 
 (defun ml/refresh-left-msg ()
   "Set the left portion of the mode-line."
