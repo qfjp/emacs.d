@@ -31,6 +31,7 @@
       "p D" 'projectile-dired
       "p d" 'projectile-find-dir
       "p e" 'project-explorer-open
+      "p f" 'projectile-find-file
       "p j" 'projectile-find-tag
       "p k" 'projectile-kill-buffers
       "p R" 'projectile-regenerate-tags
