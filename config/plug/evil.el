@@ -73,6 +73,20 @@
   :config
   (global-set-key (kbd "C-a") 'evil-numbers/inc-at-pt))
 
+(defun evil/set-key (state key def &rest bindings)
+  (define-key state (kbd key) def)
+  (cond ((null bindings)
+         nil)
+        (t
+         (if (equal (length bindings) 1)
+             (setq bindings (first bindings)))
+         (let ((next-key (first bindings))
+               (next-def (first (rest bindings)))
+               (next-rest (rest (rest bindings))))
+           (if (null next-rest)
+               (evil/set-key state next-key next-def)
+             (evil/set-key state next-key next-def next-rest))))))
+
 (use-package evil
   :ensure t
   :commands (evil)
@@ -81,27 +95,26 @@
   :config
   (progn
     (setq evil-search-wrap nil)
+    (evil/set-key evil-normal-state-map
+                  "j" 'evil-next-visual-line
+                  "k" 'evil-previous-visual-line
+                  "gj" 'evil-next-line
+                  "gk" 'evil-previous-line
+                  "gh" 'help-command
+                  "C-h" 'evil-window-left
+                  "C-j" 'evil-window-down
+                  "C-k" 'evil-window-up
+                  "C-l" 'evil-window-right
+                  "C-n" 'swbuff-switch-to-next-buffer
+                  "C-b" 'swbuff-switch-to-previous-buffer
+                  "z[" 'hs-show-all
+                  "z]" 'hs-hide-all
+                  ";" 'evil-ex)
+    (define-key key-translation-map (kbd "gx") (kbd "C-x"))
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "K")
       'elisp-slime-nav-describe-elisp-thing-at-point)
-    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-    (define-key evil-normal-state-map (kbd "gj") 'evil-next-line)
-    (define-key evil-normal-state-map (kbd "gk") 'evil-previous-line)
-    (define-key evil-normal-state-map (kbd "gh") 'help-command)
-    (define-key key-translation-map (kbd "gx") (kbd "C-x"))
-    (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-    (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-    (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-    (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-    (define-key evil-normal-state-map (kbd "C-n")
-      'swbuff-switch-to-next-buffer)
-    (define-key evil-normal-state-map (kbd "C-b")
-      'swbuff-switch-to-previous-buffer)
-    (define-key evil-normal-state-map (kbd ";") 'evil-ex)
     (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
 
-    (define-key evil-normal-state-map (kbd "z[") 'hs-show-all)
-    (define-key evil-normal-state-map (kbd "z]") 'hs-hide-all)
     (my-setup-folding-by-marks)
     ;;(add-hook 'evil-insert-state-entry-hook (lambda () (linum-mode -1)))
     ;;(add-hook 'evil-insert-state-exit-hook (lambda () (linum-mode)))
