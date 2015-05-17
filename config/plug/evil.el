@@ -35,10 +35,8 @@
       "p k" 'projectile-kill-buffers
       "p R" 'projectile-regenerate-tags
       ;; paredit
-      "l j" 'paredit-forward
-      "l k" 'paredit-backward
-      "l h" 'paredit-backward-up
-      "l l" 'paredit-forward-up
+      "l j" 'paredit-splice-sexp
+      "l k" 'paredit-wrap-round
       "l r" 'paredit-raise-sexp
       "l C" 'paredit-convolute-sexp
       "l s" 'paredit-forward-slurp-sexp
