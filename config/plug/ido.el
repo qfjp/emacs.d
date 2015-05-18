@@ -20,6 +20,7 @@
   ;; To disable flx highlights use this:
   ;; (setq flx-ido-use-faces nil)
   :config
+  (setq ido-ignore-buffers '("\\` " "^*"))
   (add-hook 'ido-minibuffer-setup-hook
             'keymaps/ido))
 
