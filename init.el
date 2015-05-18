@@ -158,9 +158,7 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (require 'plug/evil)
-
-(add-to-list 'load-path (concat user-emacs-directory "config/plug/modeline"))
-(require 'my-mode-line)
+(require 'plug/modeline)
 
 ;; Undo tree history
 (setq undo-tree-auto-save-history t)
