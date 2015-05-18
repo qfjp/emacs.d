@@ -136,12 +136,13 @@
 (require 'automodes/sh)
 (require 'automodes/markdown)
 
+
 (use-package aggressive-indent
   :ensure t
   :init
   (global-aggressive-indent-mode 1)
   :config
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode 'sh-mode))
 
 (use-package emmet-mode
   :ensure t
