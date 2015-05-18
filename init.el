@@ -131,6 +131,10 @@
 (require 'plug/project-search)
 (require 'plug/paredit)
 
+;; org mode
+(setq org-log-done 'time)
+(add-hook 'org-mode-hook 'org-indent-mode)
+
 (require 'automodes/conf)
 (require 'automodes/sh)
 (require 'automodes/markdown)
