@@ -10,20 +10,22 @@
   (folding-mode-add-find-file-hook)
   (folding-add-to-marks-list 'sh-mode "# {{{" "# }}}")
 
-  (defun my-change-fold-keymaps ()
+  (defun my-folding-fold-keymaps ()
     (if folded-file
-        (progn
-          (define-key evil-normal-state-local-map (kbd "z[")
-            'folding-open-buffer)
-          (define-key evil-normal-state-local-map (kbd "z]")
-            'folding-whole-buffer)
-          (define-key evil-normal-state-local-map (kbd "zo")
-            'folding-show-current-entry)
-          (define-key evil-normal-state-local-map (kbd "zc")
-            'folding-hide-current-entry))))
-  (defadvice folding-mode (after folding-mode activate)
-    (my-change-fold-keymaps))
-  (ad-activate 'folding-mode)
+        (evil/set-key evil-normal-state-local-map
+                      "z[" 'folding-open-buffer
+                      "z]" 'folding-whole-buffer
+                      "zo" 'folding-show-current-entry
+                      "zc" 'folding-hide-current-entry)))
+
+  (defun my-org-fold-keymaps ()
+    (progn
+      (evil/set-key evil-normal-state-local-map
+                    "z[" 'show-all
+                    "z]" 'org-overview)))
+  (add-hook 'folding-mode-hook 'my-folding-fold-keymaps)
+
+  (add-hook 'org-mode-hook 'my-org-fold-keymaps)
   (add-hook 'prog-mode-hook 'hs-minor-mode))
 (provide 'plug/folding-toggle)
 
