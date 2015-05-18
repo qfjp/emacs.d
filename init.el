@@ -116,6 +116,7 @@
 (require 'plug/latex)
 (require 'plug/project-search)
 (require 'plug/paredit)
+(require 'plug/guide-key)
 
 ;; org mode
 (setq org-log-done 'time)
@@ -169,6 +170,7 @@
 (custom-theme-set-faces
  'base16-default-dark
  `(cursor ((t (:foreground "#ffffff")))))
+
 
 (provide 'init)
 ;;; init.el ends here
