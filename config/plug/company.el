@@ -9,8 +9,13 @@
   :ensure t
   :ensure company-anaconda
   :ensure anaconda-mode
+  :ensure emacs-eclim
   :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  (progn
+    (require 'company-emacs-eclim)
+    (company-emacs-eclim-setup)
+    (global-company-mode))
+  ;;(add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-idle-delay 0)
   (define-key company-active-map (kbd "C-n") 'company-select-next)

@@ -98,13 +98,29 @@
 (require 'keymaps/dired)
 (require 'keymaps/magit)
 (require 'keymaps/ido)
+(require 'keymaps/eclim)
+
+(add-hook 'eclim-project-mode-hook 'keymaps/eclim)
 
 (require 'plug/package)
 (require 'plug/use-package)
 (require 'plug/env-setup)
-;(require 'plug/bufcycle)
-;(require 'plug/helm)
+;;(require 'plug/bufcycle)
+;;(require 'plug/helm)
 (require 'plug/linum)
+
+(use-package emacs-eclim
+  :ensure t
+  :demand company
+  :init
+  (progn
+    (require 'eclim)
+    (require 'eclimd)
+    (global-eclim-mode)
+    (add-hook 'java-mode-hook
+              (lambda () (setq-local company-minimum-prefix-length 1)))
+    ))
+
 (require 'plug/company)
 (require 'plug/flycheck)
 (require 'plug/elisp)
