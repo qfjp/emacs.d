@@ -232,19 +232,10 @@ This will be a section on the left of the status bar."
     '(:eval encoding-msg)
     '(:eval ruler-msg))))
 
-(defun write-spaces (length accum)
-  "Writes LENGTH number of spaces to the accumulator ACCUM."
-  (cond
-   ((equalp length 0) accum)
-   (t (write-spaces (- length 1) (concat accum " ")))))
-
-
 (defun refresh-left-right-buffer ()
   "Set the size of the gap between the left and right messages."
-  (setq left-right-buffer
-        (write-spaces
-         (calculate-buffer-width)
-         "")))
+  (setq left-right-buffer (make-string (calculate-buffer-width) ?\s))
+  )
 
 (defun refresh-mode-line (&optional arg arg2 arg3)
   "Refresh the whole mode line; ARG, ARG2 and ARG3 provided to satisfy scroll hooks."
@@ -259,6 +250,7 @@ This will be a section on the left of the status bar."
   (refresh-left-msg)
   (refresh-right-msg)
   (refresh-left-right-buffer))
+
 
 (setq-default
  mode-line-format
