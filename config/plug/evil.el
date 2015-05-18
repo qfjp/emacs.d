@@ -46,6 +46,13 @@
       "l B" 'paredit-backward-barf-sexp
       ;;"p r" 'helm-projectile-recentf
       ;;"p s" 'helm-projectile-switch-project
+
+      ;; org-mode
+      "o t" 'org-todo
+      "o T" 'org-insert-todo-heading
+      "o l" 'org-store-link
+      "o L" 'org-insert-link
+      "o g" 'org-todo-list
       )))
 
 (use-package evil-search-highlight-persist
