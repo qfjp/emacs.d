@@ -105,6 +105,7 @@
 (require 'plug/use-package)
 (require 'plug/env-setup)
 (require 'plug/linum)
+(require 'plug/irony)
 (require 'plug/eclim)
 (require 'plug/company)
 (require 'plug/flycheck)
