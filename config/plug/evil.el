@@ -122,6 +122,7 @@
     (keymaps/package-list)
     (keymaps/ibuffer)
     (keymaps/magit)
+    (keymaps/org-agenda)
     (evil-mode 1)))
 
 (provide 'plug/evil)
