@@ -26,21 +26,7 @@
   (add-to-list 'company-backends 'company-anaconda)
   (add-hook 'python-mode-hook 'anaconda-mode)
 
-  (defvar company-mode/enable-yas t
-    "Enable yasnippet for all backends.")
-
-  ;;(defun company-mode/backend-with-yas (backend)
-  ;;  "Add snippet completion to company menus given a BACKEND list."
-  ;;  (if (or (not company-mode/enable-yas)
-  ;;          (and (listp backend)
-  ;;               (member 'company-yasnippet backend)))
-  ;;      backend
-  ;;    (append (if (consp backend) backend (list backend))
-  ;;            '(:with company-yasnippet))))
-
-
-  ;;(setq company-backends
-  ;;      (mapcar #'company-mode/backend-with-yas company-backends)))
-  )
+  (setq company-backends (remove 'company-clang company-backends))
+  (push '(company-clang :with company-yasnippet) company-backends))
 (provide 'plug/company)
 ;;; plug/company.el ends here
