@@ -10,6 +10,11 @@
   :config
   (key-chord-define-global "jk" 'evil-normal-state))
 
+
+(define-prefix-command 'lisp-prefix)
+(define-prefix-command 'project-prefix)
+(define-prefix-command 'org-prefix)
+
 (use-package evil-leader
   :commands (evil-leader-mode)
   :ensure t
@@ -27,6 +32,7 @@
       "q" 'kill-buffer-and-window
       "b" 'ido-switch-buffer
       ;; projectile
+      "p" 'project-prefix
       "p b" 'projectile-switch-to-buffer
       "p D" 'projectile-dired
       "p d" 'projectile-find-dir
@@ -35,7 +41,9 @@
       "p j" 'projectile-find-tag
       "p k" 'projectile-kill-buffers
       "p R" 'projectile-regenerate-tags
+
       ;; paredit
+      "l" 'lisp-prefix
       "l j" 'paredit-splice-sexp
       "l k" 'paredit-wrap-round
       "l r" 'paredit-raise-sexp
@@ -48,11 +56,13 @@
       ;;"p s" 'helm-projectile-switch-project
 
       ;; org-mode
+      "o" 'org-prefix
       "o t" 'org-todo
       "o T" 'org-insert-todo-heading
       "o l" 'org-store-link
       "o L" 'org-insert-link
       "o g" 'org-todo-list
+
       )))
 
 (use-package evil-search-highlight-persist
