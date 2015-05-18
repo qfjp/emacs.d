@@ -118,8 +118,7 @@
     (require 'eclimd)
     (global-eclim-mode)
     (add-hook 'java-mode-hook
-              (lambda () (setq-local company-minimum-prefix-length 1)))
-    ))
+              (lambda () (setq-local company-minimum-prefix-length 1)))))
 
 (require 'plug/company)
 (require 'plug/flycheck)
@@ -135,7 +134,6 @@
 (require 'automodes/conf)
 (require 'automodes/sh)
 (require 'automodes/markdown)
-
 
 (use-package aggressive-indent
   :ensure t
