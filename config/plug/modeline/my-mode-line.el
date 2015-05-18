@@ -211,8 +211,9 @@ This will be a section on the left of the status bar."
                         (+ (string-width (format-mode-line mode-line-left))
                            (string-width (format-mode-line mode-line-right)))
                         fudge-val)))
-  num-spaces)
-
+  (if (< num-spaces 0)
+      0
+    num-spaces))
 
 (defun refresh-left-msg ()
   "Set the left portion of the mode-line."
