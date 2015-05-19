@@ -100,6 +100,7 @@
 (require 'keymaps/ido)
 (require 'keymaps/eclim)
 (require 'keymaps/org-agenda)
+(require 'keymaps/project-explorer)
 
 (require 'plug/package)
 (require 'plug/use-package)
