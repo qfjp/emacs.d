@@ -246,8 +246,8 @@ and sets the mode-line accordingly."
   (setq left-right-buffer (make-string (calculate-buffer-width) ?\s))
   )
 
-(defun refresh-mode-line (&optional arg arg2 arg3)
-  "Refresh the whole mode line; ARG, ARG2 and ARG3 provided to satisfy scroll hooks."
+(defun refresh-mode-line (&optional arg arg2 arg3 arg4)
+  "Refresh the whole mode line; ARG, ARG2 ARG3, and ARG4 provided to satisfy advice hooks."
   (refresh-colors)
   (refresh-evil-state-msg)
   (refresh-secondary-state-msg)
@@ -279,6 +279,13 @@ and sets the mode-line accordingly."
 (advice-add 'evil-forward-char :after
             #'refresh-mode-line)
 (advice-add 'evil-backward-char :after
+            #'refresh-mode-line)
+
+(advice-add 'evil-visual-char :after
+            #'refresh-mode-line)
+(advice-add 'evil-visual-line :after
+            #'refresh-mode-line)
+(advice-add 'evil-visual-block :after
             #'refresh-mode-line)
 
 (add-hook 'window-scroll-functions #'refresh-mode-line)

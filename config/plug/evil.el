@@ -109,12 +109,15 @@
   :demand evil
   :demand swbuff-x
   :config
-  (progn ;; State messages
-    (setq evil-normal-state-message "")
-    (setq evil-insert-state-message "")
-    (setq evil-visual-block-message "")
-    (setq evil-visual-char-message "")
-    (setq evil-visual-line-message ""))
+  (setq evil-echo-state nil) ; don't echo the state into the message area
+
+  (when global-hl-line-mode
+    (advice-add 'evil-visual-activate-hook :after
+                (lambda (&optional command)
+                  (global-hl-line-mode -1)))
+    (advice-add 'evil-visual-deactivate-hook :after
+                (lambda (&optional command)
+                  (global-hl-line-mode))))
   (progn
     (setq evil-search-wrap nil)
     (evil/set-key evil-normal-state-map
