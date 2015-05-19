@@ -109,6 +109,12 @@
   :demand evil
   :demand swbuff-x
   :config
+  (progn ;; State messages
+    (setq evil-normal-state-message "")
+    (setq evil-insert-state-message "")
+    (setq evil-visual-block-message "")
+    (setq evil-visual-char-message "")
+    (setq evil-visual-line-message ""))
   (progn
     (setq evil-search-wrap nil)
     (evil/set-key evil-normal-state-map
