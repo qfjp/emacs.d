@@ -119,7 +119,8 @@ This will be a section on the left of the status bar."
     (setq secondary-fg cur-state-bg)
     (setq evil-state-msg
           (airline/create-left-section
-           "VISUAL" state-fg visual-color secondary-bg
+           (find-visual-state)
+           state-fg visual-color secondary-bg
            '(:weight bold))))
    ((evil-replace-state-p)
     (setq secondary-bg secondary-normal-bg)
@@ -127,8 +128,15 @@ This will be a section on the left of the status bar."
     (setq evil-state-msg
           (airline/create-left-section
            "REPLACE" state-fg replace-color secondary-bg
-           '(:weight bold)))))
-  )
+           '(:weight bold))))))
+
+(defun find-visual-state ()
+  "Gets the type of visual state evil mode is in (line, block, etc.)
+and sets the mode-line accordingly."
+  (cond
+   ((equalp (evil-visual-type) 'line) "V-LINE")
+   ((equalp (evil-visual-type) 'block) "V-BLOCK")
+   (t "VISUAL")))
 
 (defun refresh-major-mode-msg ()
   "Give an indicator for the major mode."
