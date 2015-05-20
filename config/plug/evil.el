@@ -31,6 +31,7 @@
       "w" 'save-buffer
       "q" 'kill-buffer-and-window
       "b" 'ido-switch-buffer
+      "t" 'sr-speedbar-toggle
       ;; projectile
       "p" 'project-prefix
       "p b" 'projectile-switch-to-buffer
