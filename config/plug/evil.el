@@ -20,7 +20,6 @@
   :ensure t
   :ensure paredit
   :ensure projectile
-  ;:ensure project-explorer
   :demand evil-leader
   :init
   (global-evil-leader-mode)
