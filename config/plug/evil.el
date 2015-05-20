@@ -89,8 +89,10 @@
   :config
   (global-set-key (kbd "C-a") 'evil-numbers/inc-at-pt))
 
-(defun evil/set-key (state key def &rest bindings)
-  (define-key state (kbd key) def)
+(defun evil/set-key (keymap key def &rest bindings)
+  "Given a KEYMAP, set KEY to DEF. Optionally, you
+can provide more definitions in BINDINGS"
+  (define-key keymap (kbd key) def)
   (cond ((null bindings)
          nil)
         (t
@@ -100,8 +102,8 @@
                (next-def (first (rest bindings)))
                (next-rest (rest (rest bindings))))
            (if (null next-rest)
-               (evil/set-key state next-key next-def)
-             (evil/set-key state next-key next-def next-rest))))))
+               (evil/set-key keymap next-key next-def)
+             (evil/set-key keymap next-key next-def next-rest))))))
 
 (use-package evil
   :ensure t
