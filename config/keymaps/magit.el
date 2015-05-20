@@ -20,7 +20,8 @@
          (kbd "u") 'magit-unstage-item
          (kbd "p") 'magit-toggle-section
          (kbd "P") 'magit-push
-         (kbd "r") 'magit-refresh)
+         (kbd "r") 'magit-refresh
+         (kbd "q") 'kill-buffer-and-window)
 
        (evil-define-key 'normal magit-log-mode-map
          (kbd "j") 'magit-goto-next-section

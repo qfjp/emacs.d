@@ -7,7 +7,8 @@
   "Keymaps for `help-mode' in evil mode."
   (evil-set-initial-state 'help-mode 'normal)
   (evil/set-key evil-normal-state-local-map
-                ";" 'evil-ex))
+                ";" 'evil-ex
+                "q" 'kill-buffer-and-window))
 (add-hook 'help-mode-hook 'keymaps/help-mode)
 
 (provide 'keymaps/help-mode)
