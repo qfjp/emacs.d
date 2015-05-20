@@ -102,6 +102,7 @@
 (require 'keymaps/org-agenda)
 (require 'keymaps/project-explorer)
 (require 'keymaps/help-mode)
+(require 'keymaps/python)
 
 (require 'plug/package)
 (require 'plug/use-package)
@@ -110,6 +111,7 @@
 (require 'plug/irony)
 (require 'plug/eclim)
 (require 'plug/company)
+(require 'plug/python)
 (require 'plug/flycheck)
 (require 'plug/elisp)
 (require 'plug/column)

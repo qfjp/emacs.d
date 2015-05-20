@@ -7,8 +7,6 @@
   (yas-global-mode 1))
 (use-package company
   :ensure t
-  :ensure company-anaconda
-  :ensure anaconda-mode
   :ensure emacs-eclim
   :init
   (progn
@@ -22,12 +20,8 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "C-b") 'company-select-previous)
 
-  ;; python completion
-  (add-to-list 'company-backends 'company-anaconda)
-  (add-hook 'python-mode-hook 'anaconda-mode)
-
-  ;(setq company-backends (remove 'company-clang company-backends))
-  ;(push '(company-clang :with company-yasnippet) company-backends)
+  ;;(setq company-backends (remove 'company-clang company-backends))
+  ;;(push '(company-clang :with company-yasnippet) company-backends)
   )
 (provide 'plug/company)
 ;;; plug/company.el ends here
