@@ -37,5 +37,7 @@
        (evil-define-key 'normal dired-mode-map "q"
          'kill-this-buffer))))
 
+(add-hook 'dired-mode-hook 'keymaps/dired)
+
 (provide 'keymaps/dired)
 ;;; keymaps/dired.el ends here

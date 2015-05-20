@@ -13,5 +13,7 @@
          (kbd "x") 'package-menu-execute
          (kbd "j") 'evil-next-line
          (kbd "k") 'evil-previous-line))))
+
+(add-hook 'package-menu-mode-hook 'keymaps/package-list)
 (provide 'keymaps/package-list)
 ;;; keymaps/package-list.el ends here

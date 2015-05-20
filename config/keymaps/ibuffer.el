@@ -12,5 +12,6 @@
          (kbd "k") 'evil-previous-line
          (kbd "l") 'ibuffer-visit-buffer
          (kbd "v") 'ibuffer-toggle-marks))))
+(add-hook 'ibuffer-mode-hook 'keymaps/ibuffer)
 (provide 'keymaps/ibuffer)
 ;;; keymaps/ibuffer ends here

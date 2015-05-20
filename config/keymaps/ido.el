@@ -10,5 +10,6 @@
 
                   "C-k" 'ido-prev-match
                   "C-b" 'ido-prev-match)))
+(add-hook 'ido-minibuffer-setup-hook 'keymaps/ido)
 (provide 'keymaps/ido)
 ;;; keymaps/ido.el ends here

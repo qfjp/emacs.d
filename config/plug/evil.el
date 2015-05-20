@@ -144,12 +144,6 @@ can provide more definitions in BINDINGS"
     (define-key evil-ex-map (kbd "w ;") 'save-buffer) ; quick save
 
     (my-setup-folding-by-marks)
-    ;;(add-hook 'evil-insert-state-entry-hook (lambda () (linum-mode -1)))
-    ;;(add-hook 'evil-insert-state-exit-hook (lambda () (linum-mode)))
-    (keymaps/dired)
-    (keymaps/package-list)
-    (keymaps/ibuffer)
-    (keymaps/magit)
     (keymaps/org-agenda)
     (evil-mode 1)))
 

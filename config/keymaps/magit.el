@@ -33,5 +33,6 @@
        (evil-define-key 'normal magit-process-mode-map
          (kbd "j") 'evil-next-line
          (kbd "k") 'evil-previous-line))))
+(add-hook 'magit-mode-hook 'keymaps/magit)
 (provide 'keymaps/magit)
 ;;; keymaps/magit.el ends here
