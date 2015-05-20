@@ -26,7 +26,11 @@
 (defun keymaps/speedbar ()
   (evil-set-initial-state 'speedbar-mode 'normal)
   (evil-define-key 'normal speedbar-mode-map
-    (kbd "TAB") 'speedbar-toggle-line-expansion))
+    (kbd "TAB") 'speedbar-toggle-line-expansion
+    (kbd ";q") 'sr-speedbar-close))
+
+(advice-add 'sr-speedbar-close :after #'(lambda () (guide-key-mode 1)))
+(advice-add 'sr-speedbar-open :after #'(lambda () (guide-key-mode -1)))
 
 (add-hook 'project-explorer-mode-hook 'keymaps/project-explorer)
 (add-hook 'speedbar-mode-hook 'keymaps/speedbar)
