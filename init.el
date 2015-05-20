@@ -131,6 +131,15 @@
 (require 'automodes/sh)
 (require 'automodes/markdown)
 
+(progn ; Continue comment characters
+  (electric-indent-mode +1)
+
+  (defun my-newline-and-indent-mode-hook ()
+    (local-set-key (kbd "RET") (key-binding (kbd "M-j")))
+    (local-set-key (kbd "<C-return>") #'electric-indent-just-newline)))
+
+(add-hook 'prog-mode-hook #'my-newline-and-indent-mode-hook)
+
 (use-package aggressive-indent
   :ensure t
   :init
