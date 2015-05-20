@@ -27,7 +27,9 @@
   (evil-set-initial-state 'speedbar-mode 'normal)
   (evil-define-key 'normal speedbar-mode-map
     (kbd "TAB") 'speedbar-toggle-line-expansion
-    (kbd ";q") 'sr-speedbar-close))
+    (kbd ";q") 'sr-speedbar-close
+    (kbd "q") 'sr-speedbar-close
+    ))
 
 (advice-add 'sr-speedbar-close :after #'(lambda () (guide-key-mode 1)))
 (advice-add 'sr-speedbar-open :after #'(lambda () (guide-key-mode -1)))
