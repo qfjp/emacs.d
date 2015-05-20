@@ -101,6 +101,7 @@
 (require 'keymaps/eclim)
 (require 'keymaps/org-agenda)
 (require 'keymaps/project-explorer)
+(require 'keymaps/help-mode)
 
 (require 'plug/package)
 (require 'plug/use-package)
