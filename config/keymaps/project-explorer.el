@@ -23,6 +23,12 @@
                 "s" 'pe/change-directory
                 "w" 'pe/copy-file-name-as-kill))
 
+(defun keymaps/speedbar ()
+  (evil-set-initial-state 'speedbar-mode 'normal)
+  (evil-define-key 'normal speedbar-mode-map
+    (kbd "TAB") 'speedbar-toggle-line-expansion))
+
 (add-hook 'project-explorer-mode-hook 'keymaps/project-explorer)
+(add-hook 'speedbar-mode-hook 'keymaps/speedbar)
 (provide 'keymaps/project-explorer)
 ;;; project-explorer.el ends here
