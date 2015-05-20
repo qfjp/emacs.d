@@ -10,8 +10,13 @@
   :ensure t
   :config
   (setq sr-speedbar-right-side nil)
-  (add-hook 'speedbar-mode-hook #'(lambda () (visual-line-mode -1)))
-  )
+  (setq sr-speedbar-auto-refresh nil)
+  (setq sr-speedbar-width 40)
+  (setq sr-speedbar-max-width 80)
+  (setq speedbar-smart-directory-expand-flag t)
+  (setq speedbar-use-images nil)
+  (speedbar-add-supported-extension ".el")
+  (add-hook 'speedbar-mode-hook #'(lambda () (visual-line-mode -1))))
 
 ;; (use-package project-explorer
 ;;   :ensure t)
