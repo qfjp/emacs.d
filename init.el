@@ -146,7 +146,10 @@
 (use-package indent-guide
   :ensure t
   :init
-  (indent-guide-global-mode))
+  (indent-guide-global-mode)
+  :config
+  (setq indent-guide-recursive t)
+  (setq indent-guide-threshold 1))
 
 ;; theme
 (use-package base16-theme
