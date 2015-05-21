@@ -29,7 +29,7 @@
     (evil-leader/set-key
       "w" 'save-buffer
       "q" 'kill-buffer-and-window
-      "b" 'ido-switch-buffer
+      "b" 'ibuffer
       "t" 'sr-speedbar-toggle
       ;; projectile
       "p" 'project-prefix
