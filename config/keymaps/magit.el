@@ -19,7 +19,8 @@
          (kbd "s") 'magit-stage-item
          (kbd "u") 'magit-unstage-item
          (kbd "p") 'magit-toggle-section
-         (kbd "P") 'magit-push
+         (kbd "P") 'magit-key-mode-popup-pushing
+         (kbd "F") 'magit-key-mode-popup-pulling
          (kbd "r") 'magit-refresh
          (kbd "q") 'kill-buffer-and-window)
 
