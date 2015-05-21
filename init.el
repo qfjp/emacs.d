@@ -103,6 +103,7 @@
 (require 'keymaps/project-explorer)
 (require 'keymaps/help-mode)
 (require 'keymaps/python)
+(require 'keymaps/calfw)
 
 (require 'plug/package)
 (require 'plug/use-package)
@@ -122,6 +123,7 @@
 (require 'plug/project-search)
 (require 'plug/paredit)
 (require 'plug/guide-key)
+(require 'plug/calfw)
 
 ;; org mode
 (setq org-log-done 'time)
