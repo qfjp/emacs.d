@@ -124,6 +124,7 @@
 (require 'plug/paredit)
 (require 'plug/guide-key)
 (require 'plug/calfw)
+(require 'plug/wanderlust)
 
 ;; org mode
 (setq org-log-done 'time)
