@@ -12,8 +12,7 @@
                 "q" 'bury-buffer
                 "r" 'cfw:refresh-calendar-buffer
                 "t" 'cfw:navi-goto-today-command
-                "TAB" 'cfw:navi-next-item-command
-                "SPC" 'cfw:show-details-command
+                "TAB" 'cfw:show-details-command
                 "$" 'cfw:navi-goto-week-end-command
                 "0" 'cfw:navi-goto-week-begin-command
                 ">" 'cfw:navi-next-month-command
