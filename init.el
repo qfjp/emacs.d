@@ -104,6 +104,7 @@
 (require 'keymaps/help-mode)
 (require 'keymaps/python)
 (require 'keymaps/calfw)
+(require 'keymaps/wanderlust)
 
 (require 'plug/package)
 (require 'plug/use-package)

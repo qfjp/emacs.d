@@ -3,6 +3,8 @@
 ;;; Code:
 (use-package wanderlust
   :ensure t
+  :init
+  (autoload 'wl "wl" "Wanderlust" t)
   :config
   (setq elmo-imap4-default-server "imap.gmail.com"
         elmo-imap4-default-user "djpade@gmail.com"
@@ -32,7 +34,7 @@
         wl-fcc-force-as-read    t
 
         ;;for when auto-compleating foldernames
-        wl-default-spec "%")
-  (add-hook 'mime-view-mode-hook #'(lambda () (setq show-trailing-whitespace nil))))
+        wl-default-spec "%"))
+(add-hook 'mime-view-mode-hook #'(lambda () (setq show-trailing-whitespace nil)))
 (provide 'plug/wanderlust)
 ;;; wanderlust.el ends here
