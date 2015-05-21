@@ -72,26 +72,26 @@
   "Size of the gap between the left and right.")
 
 (defun airline/create-left-section (text fg bg nextbg &optional face-args)
-  "Create a section with TEXT with colors FG/BG.
+  "Make section w/ TEXT w/ colors FG/BG, with the NEXTBG color and FACE-ARGS.
 This will be a section on the left of the status bar."
   (concat
    (propertize
-    (concat " " text " ")
+    (concat "" text)
     'face
     (append `(:foreground ,fg :background ,bg) face-args))
    (propertize (char-to-string ?\ue0b0)
                'face `(:foreground ,bg :background ,nextbg))))
 
 (defun airline/create-right-section (text fg bg prevbg &optional face-args)
-  "Create a section with TEXT with colors FG/BG.
-This will be a section on the left of the status bar."
-  (concat
-   (propertize (char-to-string ?\ue0b2)
-               'face `(:foreground ,bg :background ,prevbg))
-   (propertize
-    (concat " " text " ")
-    'face
-    (append `(:foreground ,fg :background ,bg) face-args))))
+  "Make section w/ TEXT w/ colors FG/BG, with the PREVBG color and FACE-ARGS.
+This will be a section on the right of the status bar."
+(concat
+ (propertize (char-to-string ?\ue0b2)
+             'face `(:foreground ,bg :background ,prevbg))
+ (propertize
+  (concat " " text " ")
+  'face
+  (append `(:foreground ,fg :background ,bg) face-args))))
 
 ;; Refresh state
 (defun refresh-evil-state-msg ()
@@ -103,7 +103,7 @@ This will be a section on the left of the status bar."
     (setq secondary-fg main-fg)
     (setq evil-state-msg
           (airline/create-left-section
-           "NORMAL" state-fg normal-color secondary-bg
+           " NORMAL " state-fg normal-color secondary-bg
            '(:weight bold))))
    ((evil-insert-state-p)
     (setq secondary-bg secondary-dark-bg)
@@ -111,7 +111,7 @@ This will be a section on the left of the status bar."
     (setq secondary-fg cur-state-bg)
     (setq evil-state-msg
           (airline/create-left-section
-           "INSERT" state-fg insert-color secondary-bg
+           " INSERT " state-fg insert-color secondary-bg
            '(:weight bold))))
    ((evil-visual-state-p)
     (setq secondary-bg secondary-dark-bg)
@@ -127,23 +127,23 @@ This will be a section on the left of the status bar."
     (setq cur-state-bg replace-color)
     (setq evil-state-msg
           (airline/create-left-section
-           "REPLACE" state-fg replace-color secondary-bg
+           " REPLACE " state-fg replace-color secondary-bg
            '(:weight bold))))))
 
 (defun find-visual-state ()
   "Gets the type of visual state evil mode is in (line, block, etc.)
 and sets the mode-line accordingly."
   (cond
-   ((equalp (evil-visual-type) 'line) "V-LINE")
-   ((equalp (evil-visual-type) 'block) "V-BLOCK")
-   (t "VISUAL")))
+   ((equalp (evil-visual-type) 'line) " V-LINE ")
+   ((equalp (evil-visual-type) 'block) " V-BLOCK ")
+   (t " VISUAL ")))
 
 (defun refresh-major-mode-msg ()
   "Give an indicator for the major mode."
   (setq
    major-mode-msg
    (airline/create-right-section
-     mode-name main-fg main-bg main-bg)))
+    mode-name main-fg main-bg main-bg)))
 
 (defun refresh-buffer-name-msg ()
   "Give an indicator for the current file."
@@ -170,7 +170,7 @@ and sets the mode-line accordingly."
   (setq-default nyan-wavy-trail t)
   (setq ruler-msg
         (concat
-         " " (nyan-create) "  %3l: %3c "))
+         " " (nyan-create) "  %3l: %2c "))
   (setq ruler-msg (airline/create-right-section
                    ruler-msg
                    state-fg

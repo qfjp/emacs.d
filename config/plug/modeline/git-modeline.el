@@ -15,7 +15,8 @@
           (concat
            "  "
            git-branch
-           " "))))
+           " ")))
+   (t (setq git-branch-msg "")))
   git-branch-msg)
 
 (defvar-local git-branch/buffer nil)
