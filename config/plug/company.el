@@ -1,6 +1,7 @@
 ;;; plug/company.el --- Autocompletion
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package yasnippet
   :ensure t
   :init
@@ -24,4 +25,4 @@
   ;;(push '(company-clang :with company-yasnippet) company-backends)
   )
 (provide 'plug/company)
-;;; plug/company.el ends here
+;;; company.el ends here

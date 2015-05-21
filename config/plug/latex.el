@@ -2,7 +2,7 @@
 ;;; plugins related to LaTeX
 ;;; Commentary:
 ;;; Code:
-
+(require 'use-package)
 (use-package tex-site
   :ensure auctex
   :config
@@ -15,4 +15,4 @@
         '(("PDF Viewer" "zathura %o"))))
 
 (provide 'plug/latex)
-;;; plug/latex.el ends here
+;;; latex.el ends here

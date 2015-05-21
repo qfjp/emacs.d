@@ -1,6 +1,8 @@
 ;;; plug/evil.el --- EVIL EVIL EVIL
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
+
 (use-package key-chord
   :ensure t
   :demand key-chord
@@ -61,9 +63,7 @@
       "o T" 'org-insert-todo-heading
       "o l" 'org-store-link
       "o L" 'org-insert-link
-      "o g" 'org-todo-list
-
-      )))
+      "o g" 'org-todo-list)))
 
 (use-package evil-search-highlight-persist
   :commands (evil-search-highlight-persist)
@@ -90,8 +90,8 @@
   (global-set-key (kbd "C-a") 'evil-numbers/inc-at-pt))
 
 (defun evil/set-key (keymap key def &rest bindings)
-  "Given a KEYMAP, set KEY to DEF. Optionally, you
-can provide more definitions in BINDINGS"
+  "Given a KEYMAP, set KEY to DEF.
+Optionally, you can provide more definitions in BINDINGS"
   (define-key keymap (kbd key) def)
   (cond ((null bindings)
          nil)
@@ -148,4 +148,4 @@ can provide more definitions in BINDINGS"
     (evil-mode 1)))
 
 (provide 'plug/evil)
-;;; plug/evil.el ends here
+;;; evil.el ends here

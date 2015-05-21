@@ -1,6 +1,7 @@
 ;;; plug/wanderlust.el --- Wanderlust settings
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package wanderlust
   :ensure t
   :init

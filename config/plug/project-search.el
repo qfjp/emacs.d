@@ -1,6 +1,7 @@
 ;;; plug/project-search.el --- Utilities for searching a project
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package projectile
   :ensure t
   :init

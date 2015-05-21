@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package yasnippet
   :ensure t)
 

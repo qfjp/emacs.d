@@ -1,6 +1,7 @@
 ;;; plug/ido.el --- ido mode?
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package ido
   :ensure t
   :ensure flx-ido
@@ -33,4 +34,4 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
 
 (provide 'plug/ido)
-;;; plug/ido.el ends here
+;;; ido.el ends here

@@ -1,6 +1,7 @@
 ;;; plug/linum.el --- Relative line numbering
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package linum-relative
   :ensure t
   :demand linum-relative
@@ -9,4 +10,4 @@
   (setq linum-relative-format "%3s ")
   (add-hook 'after-change-major-mode-hook 'linum-mode))
 (provide 'plug/linum)
-;;; plug/linum.el ends here
+;;; linum.el ends here

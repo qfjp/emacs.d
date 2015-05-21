@@ -1,7 +1,7 @@
 ;;; plug/helm.el --- Better M-x menu
 ;;; Commentary:
 ;;; Code:
-
+(require 'use-package)
 (use-package helm
   :ensure t
   :demand helm
@@ -9,4 +9,4 @@
   (global-set-key (kbd "M-x") 'helm-M-x))
 
 (provide 'plug/helm)
-;;; plug/helm.el ends here
+;;; helm.el ends here

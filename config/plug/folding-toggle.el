@@ -3,7 +3,6 @@
 ;;; switches the default folding keys (in evil mode) to use folding.el
 ;;; Commentary:
 ;;; Code:
-
 (defun my-setup-folding-by-marks ()
   "Setup folding based on markers."
   (load "plug/folding" 'nomessage 'noerror)
@@ -28,5 +27,4 @@
   (add-hook 'org-mode-hook 'my-org-fold-keymaps)
   (add-hook 'prog-mode-hook 'hs-minor-mode))
 (provide 'plug/folding-toggle)
-
-;;; plug/folding-toggle.el ends here
+;;; folding-toggle.el ends here

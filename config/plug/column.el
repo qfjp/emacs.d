@@ -1,7 +1,7 @@
 ;;; plug/column.el --- 70 char width limit
 ;;; Commentary:
 ;;; Code:
-
+(require 'use-package)
 (use-package fill-column-indicator
   :ensure t
   :demand fill-column-indicator
@@ -34,4 +34,4 @@
     (turn-on-fci-mode)))
 
 (provide 'plug/column)
-;;; plug/column.el ends here
+;;; column.el ends here

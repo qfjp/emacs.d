@@ -1,6 +1,7 @@
 ;;; plug/env-setup.el --- Seems necessary for magit push
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package keychain-environment
   :ensure t
   :demand keychain-environment
@@ -13,4 +14,4 @@
   :init
   (exec-path-from-shell-initialize))
 (provide 'plug/env-setup)
-;;; plug/env-setup ends here
+;;; env-setup.el ends here

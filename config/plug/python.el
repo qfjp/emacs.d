@@ -1,6 +1,8 @@
 ;;; plug/python.el --- Python mode settings
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
+(require 'company)
 (use-package anaconda-mode
   :ensure t
   :ensure company-anaconda

@@ -1,7 +1,7 @@
 ;;; plug/magit.el --- Git utility functions
 ;;; Commentary:
 ;;; Code:
-
+(require 'use-package)
 (use-package magit
   :ensure t
   :ensure magit-gitflow
@@ -17,4 +17,4 @@
   )
 
 (provide 'plug/magit)
-;;; plug/magit ends here
+;;; magit.el ends here

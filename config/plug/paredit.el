@@ -1,6 +1,7 @@
 ;;; plug/paredit.el --- package configuration for paredit
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package paredit
   :ensure t
   :ensure paredit-everywhere
@@ -23,4 +24,4 @@
   (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
 
 (provide 'plug/paredit)
-;;; plug/paredit.el ends here
+;;; paredit.el ends here

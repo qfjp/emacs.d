@@ -1,6 +1,7 @@
 ;;; plug/irony.el --- Irony mode (C/C++)
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package irony
   :ensure t
   :ensure company-irony

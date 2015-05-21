@@ -7,4 +7,4 @@
 (require 'use-package)
 
 (provide 'plug/use-package)
-;;; plug/use-package ends here
+;;; use-package.el ends here

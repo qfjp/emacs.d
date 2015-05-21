@@ -1,16 +1,19 @@
 ;;; plug/flycheck.el --- Syntax checking
 ;;; Commentary:
 ;;; Code:
+(require 'use-package)
 (use-package flycheck
   :ensure t
   :demand flycheck
   :init
   (global-flycheck-mode t)
   :config
+  (setq flycheck-highlighting-mode 'lines)
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (add-hook 'python-mode-hook
             (lambda ()
-              (flycheck-select-checker 'python-pylint))))
+              (flycheck-select-checker 'python-pylint)))
+  (add-hook 'sh-mode-hook #'(lambda () (flycheck-select-checker 'sh-shellcheck))))
 
 (defun activate-flyspell ()
   "Force flyspell mode."

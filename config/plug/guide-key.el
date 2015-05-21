@@ -1,7 +1,7 @@
 ;;; plug/guide-key.el --- Settings for guide-key
 ;;; Commentary:
 ;;; Code:
-
+(require 'use-package)
 (use-package guide-key
   :ensure t
   :config
