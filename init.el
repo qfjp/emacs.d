@@ -105,6 +105,7 @@
 (require 'keymaps/python)
 (require 'keymaps/calfw)
 (require 'keymaps/wanderlust)
+(require 'keymaps/flycheck)
 
 (require 'plug/package)
 (require 'plug/use-package)
