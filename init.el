@@ -149,7 +149,8 @@
   :init
   (global-aggressive-indent-mode 1)
   :config
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode 'sh-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'sh-mode))
 
 (use-package emmet-mode
   :ensure t
