@@ -128,6 +128,12 @@
 (require 'plug/calfw)
 (require 'plug/wanderlust)
 
+;; Java
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2
+                                  tab-width 2
+                                  indent-tabs-mode nil)))
+
 ;; org mode
 (setq org-log-done 'time)
 (add-hook 'org-mode-hook 'org-indent-mode)

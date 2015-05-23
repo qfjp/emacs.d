@@ -47,5 +47,18 @@ See URL `https://github.com/koalaman/shellcheck/'."
   :modes sh-mode
   :predicate (lambda () (memq sh-shell flycheck-shellcheck-supported-shells)))
 
+(flycheck-define-checker java-checkstyle
+  "A java syntax and style checker using checkstyle."
+  :command ("java" "-jar" "/home/dan/.apps/checkstyle-6.6/checkstyle-6.6-all.jar"
+            "-c" "/home/dan/.apps/checkstyle-6.6/google_checks.xml"
+            "-f" "xml"
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :error-filter (lambda (errors)
+                  (flycheck-remove-error-ids
+                   (flycheck-sanitize-errors errors)))
+  :modes java-mode)
+(add-to-list 'flycheck-checkers 'java-checkstyle)
+
 (provide 'plug/flycheck)
 ;;; flycheck.el ends here
