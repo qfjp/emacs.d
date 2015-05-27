@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: cquote
+# key: cq
+# --
+~*\cquote{<<$1>>}*~$0
