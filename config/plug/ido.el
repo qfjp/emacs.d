@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (require 'use-package)
+
 (use-package ido
   :ensure t
   :ensure flx-ido
@@ -32,6 +33,18 @@
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   ;; old M-x
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+(defun keymaps/ido ()
+  "Keymaps for ido in evil mode."
+  (progn
+    (evil/set-key ido-completion-map
+                  "C-j" 'ido-next-match
+                  "C-n" 'ido-next-match
+
+                  "C-k" 'ido-prev-match
+                  "C-b" 'ido-prev-match)))
+
+(add-hook 'ido-minibuffer-setup-hook 'keymaps/ido)
 
 (provide 'plug/ido)
 ;;; ido.el ends here
