@@ -106,6 +106,8 @@ Install Git
   ;; disable backup and autosave
   (setq backup-inhibited t)
   (setq auto-save-default nil)
+
+  (setq org-src-fontify-natively t)
 #+end_src
 
 ** Package Management
