@@ -143,7 +143,7 @@ and sets the mode-line accordingly."
   (setq
    major-mode-msg
    (airline/create-right-section
-    mode-name main-fg main-bg main-bg)))
+    (format-mode-line mode-name) main-fg main-bg main-bg)))
 
 (defun refresh-buffer-name-msg ()
   "Give an indicator for the current file."
