@@ -30,7 +30,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       "w" 'save-buffer
-      "q" 'kill-buffer-and-window
+      "q" 'evil-delete-buffer
       "b" 'ibuffer
       "t" 'sr-speedbar-toggle
       ;; projectile
@@ -145,6 +145,7 @@ Optionally, you can provide more definitions in BINDINGS"
 
     (my-setup-folding-by-marks)
     (keymaps/org-agenda)
+    (evil-ex-define-cmd "q[uit]" 'evil-delete-buffer)
     (evil-mode 1)))
 
 (provide 'plug/evil)
