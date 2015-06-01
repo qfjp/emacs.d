@@ -1,67 +1,144 @@
-;;; init.el --- Emacs initialization
-;;; Commentary:
+* Emacs Org Configuration
 
-;;; Code:
+* Description
+This file is parsed by [[./init.el][init.el]] which then evaluates all =emacs-lisp=
+code blocks during startup.
+
+This configuration is designed for emacs 24.5 and above
+
+** Basic directory structure
+#+BEGIN_SRC text
+└── emacs.d
+    ├── init.el
+    ├── readme.org  # this file
+    └── config
+        ├── automodes
+        ├── keymaps
+        ├── plug
+        └── secure # optional
+#+end_src
+
+* Credits
+This =emacs.d= was heavily inspired by the following configurations
+- https://github.com/daschwa/emacs.d
+
+* Prerequisites
+** Mac OS X
+*** Xcode Command Line Tools
+**** OS X 10.8 Mountain Lion
+Either get Xcode and enable Command Line Tools, or get them
+directly from [[http://developer.apple.com/downloads][here]]
+**** OS X 10.9 Mavericks
+Open a Terminal window and enter =xcode-select --install= to
+get the CLI tools
+
+*** Homebrew
+Install Homebrew for OS X
+#+begin_src sh
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#+end_src
+Review and check warnings with =brew doctor=
+
+*** Git
+Install Git
+#+begin_src sh
+brew update
+brew install git
+#+end_src
+** Arch Linux
+*** Git
+#+begin_src sh
+pacman -S git
+#+end_src
+
+* Installing emacs
+** Mac OS X
+*** 24.5 (Stable)
+#+begin_src sh
+brew update
+brew install emacs --HEAD --with-cocoa --with-gnutls
+#+end_src
+
+*** 24.n (Devel)
+#+begin_src sh
+brew update
+brew install emacs --devel --with-cocoa --with-gnutls
+#+end_src
+
+** Arch Linux
+*** 24.5
+#+begin_src sh
+pacman -S emacs
+#+end_src
+
+* Starting Emacs
+ Start Emacs with a specific init file:
+#+begin_src sh
+emacs -q -l ~/my-init-file.el
+#+end_src
+
+* Essentials
+#+begin_src emacs-lisp
+;; Add `config' to the load path
+(add-to-list 'load-path (concat user-emacs-directory "config"))
 
 ;; disable menubar, toolbar, and scrollbars
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Gui
-(progn
-  (menu-bar-mode 0)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0))
+;; No splash screen
+(setq inhibit-startup-message t)
+(setq inhibit-splash-screen t)
 
 ;; Use primary instead of clipboard
-(progn
-  (setq x-select-enable-clipboard nil)
-  (setq x-select-enable-primary t)
-  (setq mouse-drag-copy-region t))
+(setq x-select-enable-clipboard nil)
+(setq x-select-enable-primary t)
+(setq mouse-drag-copy-region t)
 
-;; Highlight cursor mode
-(global-hl-line-mode)
-
-;; paren matching (highlight expression)
-(show-paren-mode 1)
-;;(setq show-paren-style 'expression)
-
-;; stop prompting about git symlinks
+;; Set the initial state
+(setq initial-major-mode 'text-mode)
 
 ;; Open symlinks in current directory without prompting
 (setq vc-follow-symlinks nil)
 
-;; Minibuffer persistent history
-(savehist-mode 1)
-
-;; disable start screen
-(setq inhibit-splash-screen t)
-
-;; spaces not tabs
-(setq-default indent-tabs-mode nil)
-
 ;; disable backup and autosave
-(progn
-  (setq backup-inhibited t)
-  (setq auto-save-default nil))
+(setq backup-inhibited t)
+(setq auto-save-default nil)
+#+end_src
 
-;; Emacs evil will use c-u to scroll
-(setq evil-want-C-u-scroll t)
+** Package Management
+#+begin_src emacs-lisp
+(require 'plug/package)
+(require 'plug/use-package)
+#+end_src
 
-;; Show trailing whitespace
-(progn
-  (setq whitespace-style '(face trailing tabs tab-mark))
-  (global-whitespace-mode t)
-  (setq-default show-trailing-whitespace t))
-
+** Visual Enhancements
+#+begin_src emacs-lisp
 ;; set the default font
 (set-frame-font "Fantasque Sans Mono-10")
 
-;; Make emacs remember the last place in a file
-(progn
-  (setq save-place-file "~/.emacs.d/.place")
-  (setq-default save-place t)
-  (require 'saveplace))
+;; Highlight cursor mode
+(global-hl-line-mode)
 
-;; Theme
+;; paren matching
+(show-paren-mode 1)
+(electric-pair-mode t)
+
+;; Show trailing whitespace
+(setq whitespace-style '(face trailing tabs tab-mark))
+(global-whitespace-mode t)
+(setq-default show-trailing-whitespace t)
+
+;; Wrap long lines
+(setq visual-line-fringe-indicators
+ '(left-curly-arrow right-curly-arrow))
+(global-visual-line-mode)
+#+end_src
+
+*** Theme
+**** Automatic stuff
+#+begin_src emacs-lisp
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -81,23 +158,47 @@
  '(linum ((t (:background "gray19" :foreground "#e0e0e0"))))
  '(linum-relative-current-face ((t (:inherit linum :background "color-18" :foreground "#CAE682" :weight bold))))
  '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
+#+end_src
 
-;; Paren matching
-(electric-pair-mode t)
+**** Base16
+#+begin_src emacs-lisp
+(use-package base16-theme
+  :ensure t
+  :init
+  (load-theme 'base16-default-dark))
 
-;; Wrap long lines
+(custom-theme-set-faces
+ 'base16-default-dark
+ `(cursor ((t (:foreground "#ffffff")))))
+#+end_src
+
+** Code Behavior
+#+begin_src emacs-lisp
+;; spaces not tabs
+(setq-default indent-tabs-mode nil)
+
+(progn ; Continue comment characters
+  (electric-indent-mode +1)
+
+  (defun my-newline-and-indent-mode-hook ()
+    (local-set-key (kbd "RET") (key-binding (kbd "M-j")))
+    (local-set-key (kbd "<C-return>") #'electric-indent-just-newline))
+  (add-hook 'prog-mode-hook #'my-newline-and-indent-mode-hook))
+
+;; Make emacs remember the last place in a file
 (progn
-  (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
-  (global-visual-line-mode))
+  (setq save-place-file "~/.emacs.d/.place")
+  (setq-default save-place t)
+  (require 'saveplace))
+#+end_src
 
+* Plugins
+#+begin_src emacs-lisp
 ;; Keymap configurations
-(add-to-list 'load-path (concat user-emacs-directory "config"))
 
 (require 'keymaps/ibuffer)
 (require 'keymaps/package-list)
 (require 'keymaps/dired)
-;;(require 'keymaps/magit)
-;;(require 'keymaps/ido)
 (require 'keymaps/eclim)
 (require 'keymaps/org-agenda)
 (require 'keymaps/project-explorer)
@@ -107,8 +208,6 @@
 (require 'keymaps/wanderlust)
 (require 'keymaps/flycheck)
 
-(require 'plug/package)
-(require 'plug/use-package)
 (require 'plug/env-setup)
 (require 'plug/linum)
 (require 'plug/irony)
@@ -128,6 +227,18 @@
 (require 'plug/calfw)
 (require 'plug/wanderlust)
 
+(require 'automodes/conf)
+(require 'automodes/sh)
+(require 'automodes/markdown)
+#+end_src
+
+** Plugin Scratchpad
+#+begin_src emacs-lisp
+
+;; Minibuffer persistent history
+(savehist-mode 1)
+
+
 ;; Java
 (add-hook 'java-mode-hook (lambda ()
                             (setq c-basic-offset 2
@@ -138,18 +249,7 @@
 (setq org-log-done 'time)
 (add-hook 'org-mode-hook 'org-indent-mode)
 
-(require 'automodes/conf)
-(require 'automodes/sh)
-(require 'automodes/markdown)
 
-(progn ; Continue comment characters
-  (electric-indent-mode +1)
-
-  (defun my-newline-and-indent-mode-hook ()
-    (local-set-key (kbd "RET") (key-binding (kbd "M-j")))
-    (local-set-key (kbd "<C-return>") #'electric-indent-just-newline)))
-
-(add-hook 'prog-mode-hook #'my-newline-and-indent-mode-hook)
 
 (use-package aggressive-indent
   :ensure t
@@ -174,17 +274,19 @@
   (setq indent-guide-recursive t)
   (setq indent-guide-threshold 1))
 
-;; theme
-(use-package base16-theme
-  :ensure t
-  :init
-  (load-theme 'base16-default-dark))
 
 ;; Rainbow delimiter
 (use-package rainbow-delimiters
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+#+end_src
+
+** EVIL EVIL EVIL
+#+begin_src emacs-lisp
+;; Emacs evil will use c-u to scroll
+(setq evil-want-C-u-scroll t)
 
 (require 'plug/evil)
 (require 'plug/modeline)
@@ -193,11 +295,4 @@
 (setq undo-tree-auto-save-history t)
 (setq undo-tree-history-directory-alist
       '(("." . "~/.emacs.d/undo_hist")))
-
-(custom-theme-set-faces
- 'base16-default-dark
- `(cursor ((t (:foreground "#ffffff")))))
-
-
-(provide 'init)
-;;; init.el ends here
+#+end_src
