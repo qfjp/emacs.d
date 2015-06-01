@@ -36,264 +36,265 @@ get the CLI tools
 *** Homebrew
 Install Homebrew for OS X
 #+begin_src sh
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 #+end_src
 Review and check warnings with =brew doctor=
 
 *** Git
 Install Git
 #+begin_src sh
-brew update
-brew install git
+  brew update
+  brew install git
 #+end_src
 ** Arch Linux
 *** Git
 #+begin_src sh
-pacman -S git
+  pacman -S git
 #+end_src
 
 * Installing emacs
 ** Mac OS X
 *** 24.5 (Stable)
 #+begin_src sh
-brew update
-brew install emacs --HEAD --with-cocoa --with-gnutls
+  brew update
+  brew install emacs --HEAD --with-cocoa --with-gnutls
 #+end_src
 
 *** 24.n (Devel)
 #+begin_src sh
-brew update
-brew install emacs --devel --with-cocoa --with-gnutls
+  brew update
+  brew install emacs --devel --with-cocoa --with-gnutls
 #+end_src
 
 ** Arch Linux
 *** 24.5
 #+begin_src sh
-pacman -S emacs
+  pacman -S emacs
 #+end_src
 
 * Starting Emacs
  Start Emacs with a specific init file:
 #+begin_src sh
-emacs -q -l ~/my-init-file.el
+  emacs -q -l ~/my-init-file.el
 #+end_src
 
 * Essentials
 #+begin_src emacs-lisp
-;; Add `config' to the load path
-(add-to-list 'load-path (concat user-emacs-directory "config"))
+  ;; Add `config' to the load path
+  (add-to-list 'load-path (concat user-emacs-directory "config"))
 
-;; disable menubar, toolbar, and scrollbars
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  ;; disable menubar, toolbar, and scrollbars
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; No splash screen
-(setq inhibit-startup-message t)
-(setq inhibit-splash-screen t)
+  ;; No splash screen
+  (setq inhibit-startup-message t)
+  (setq inhibit-splash-screen t)
 
-;; Use primary instead of clipboard
-(setq x-select-enable-clipboard nil)
-(setq x-select-enable-primary t)
-(setq mouse-drag-copy-region t)
+  ;; Use primary instead of clipboard
+  (setq x-select-enable-clipboard nil)
+  (setq x-select-enable-primary t)
+  (setq mouse-drag-copy-region t)
 
-;; Set the initial state
-(setq initial-major-mode 'text-mode)
+  ;; Set the initial state
+  (setq initial-major-mode 'text-mode)
 
-;; Open symlinks in current directory without prompting
-(setq vc-follow-symlinks nil)
+  ;; Open symlinks in current directory without prompting
+  (setq vc-follow-symlinks nil)
 
-;; disable backup and autosave
-(setq backup-inhibited t)
-(setq auto-save-default nil)
+  ;; disable backup and autosave
+  (setq backup-inhibited t)
+  (setq auto-save-default nil)
 #+end_src
 
 ** Package Management
 #+begin_src emacs-lisp
-(require 'plug/package)
-(require 'plug/use-package)
+  (require 'plug/package)
+  (require 'plug/use-package)
 #+end_src
 
 ** Visual Enhancements
 #+begin_src emacs-lisp
-;; set the default font
-(set-frame-font "Fantasque Sans Mono-10")
+  ;; set the default font
+  (set-frame-font "Fantasque Sans Mono-10")
 
-;; Highlight cursor mode
-(global-hl-line-mode)
+  ;; Highlight cursor mode
+  (global-hl-line-mode)
 
-;; paren matching
-(show-paren-mode 1)
-(electric-pair-mode t)
+  ;; paren matching
+  (show-paren-mode 1)
+  (electric-pair-mode t)
 
-;; Show trailing whitespace
-(setq whitespace-style '(face trailing tabs tab-mark))
-(global-whitespace-mode t)
-(setq-default show-trailing-whitespace t)
+  ;; Show trailing whitespace
+  (setq whitespace-style '(face trailing tabs tab-mark))
+  (global-whitespace-mode t)
+  (setq-default show-trailing-whitespace t)
 
-;; Wrap long lines
-(setq visual-line-fringe-indicators
- '(left-curly-arrow right-curly-arrow))
-(global-visual-line-mode)
+  ;; Wrap long lines
+  (setq visual-line-fringe-indicators
+   '(left-curly-arrow right-curly-arrow))
+  (global-visual-line-mode)
 #+end_src
 
 *** Theme
 **** Automatic stuff
 #+begin_src emacs-lisp
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("9f3a4edb56d094366afed2a9ba3311bbced0f32ca44a47a765d8ef4ce5b8e4ea")))
- '(safe-local-variable-values (quote ((folded-file . t))))
- '(when (not (facep (aref ansi-term-color-vector 0)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:background "gray19"))))
- '(linum ((t (:background "gray19" :foreground "#e0e0e0"))))
- '(linum-relative-current-face ((t (:inherit linum :background "color-18" :foreground "#CAE682" :weight bold))))
- '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     (quote
+      ("9f3a4edb56d094366afed2a9ba3311bbced0f32ca44a47a765d8ef4ce5b8e4ea")))
+   '(safe-local-variable-values (quote ((folded-file . t))))
+   '(when (not (facep (aref ansi-term-color-vector 0)))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(hl-line ((t (:background "gray19"))))
+   '(linum ((t (:background "gray19" :foreground "#e0e0e0"))))
+   '(linum-relative-current-face ((t (:inherit linum :background "color-18" :foreground "#CAE682" :weight bold))))
+   '(show-paren-match ((t (:background "dim gray" :foreground "#202020")))))
 #+end_src
 
 **** Base16
 #+begin_src emacs-lisp
-(use-package base16-theme
-  :ensure t
-  :init
-  (load-theme 'base16-default-dark))
+  (use-package base16-theme
+    :ensure t
+    :init
+    (load-theme 'base16-default-dark))
 
-(custom-theme-set-faces
- 'base16-default-dark
- `(cursor ((t (:foreground "#ffffff")))))
+  (custom-theme-set-faces
+   'base16-default-dark
+   `(cursor ((t (:foreground "#ffffff")))))
 #+end_src
 
 ** Code Behavior
 #+begin_src emacs-lisp
-;; spaces not tabs
-(setq-default indent-tabs-mode nil)
+  ;; spaces not tabs
+  (setq-default indent-tabs-mode nil)
 
-(progn ; Continue comment characters
-  (electric-indent-mode +1)
+  (progn ; Continue comment characters
+    (electric-indent-mode +1)
 
-  (defun my-newline-and-indent-mode-hook ()
-    (local-set-key (kbd "RET") (key-binding (kbd "M-j")))
-    (local-set-key (kbd "<C-return>") #'electric-indent-just-newline))
-  (add-hook 'prog-mode-hook #'my-newline-and-indent-mode-hook))
+    (defun my-newline-and-indent-mode-hook ()
+      (local-set-key (kbd "RET") (key-binding (kbd "M-j")))
+      (local-set-key (kbd "<C-return>") #'electric-indent-just-newline))
+    (add-hook 'prog-mode-hook #'my-newline-and-indent-mode-hook))
 
-;; Make emacs remember the last place in a file
-(progn
-  (setq save-place-file "~/.emacs.d/.place")
-  (setq-default save-place t)
-  (require 'saveplace))
+  ;; Make emacs remember the last place in a file
+  (progn
+    (setq save-place-file "~/.emacs.d/.place")
+    (setq-default save-place t)
+    (require 'saveplace))
 #+end_src
 
 * Plugins
 #+begin_src emacs-lisp
-;; Keymap configurations
+  ;; Keymap configurations
 
-(require 'keymaps/ibuffer)
-(require 'keymaps/package-list)
-(require 'keymaps/dired)
-(require 'keymaps/eclim)
-(require 'keymaps/org-agenda)
-(require 'keymaps/project-explorer)
-(require 'keymaps/help-mode)
-(require 'keymaps/python)
-(require 'keymaps/calfw)
-(require 'keymaps/wanderlust)
-(require 'keymaps/flycheck)
+  (require 'keymaps/ibuffer)
+  (require 'keymaps/package-list)
+  (require 'keymaps/dired)
+  (require 'keymaps/eclim)
+  (require 'keymaps/org-agenda)
+  (require 'keymaps/project-explorer)
+  (require 'keymaps/help-mode)
+  (require 'keymaps/python)
+  (require 'keymaps/calfw)
+  (require 'keymaps/wanderlust)
+  (require 'keymaps/flycheck)
 
-(require 'plug/env-setup)
-(require 'plug/linum)
-(require 'plug/irony)
-(require 'plug/eclim)
-(require 'plug/company)
-(require 'plug/python)
-(require 'plug/flycheck)
-(require 'plug/elisp)
-(require 'plug/column)
-(require 'plug/magit)
-(require 'plug/ido)
-(require 'plug/folding-toggle)
-(require 'plug/latex)
-(require 'plug/project-search)
-(require 'plug/paredit)
-(require 'plug/guide-key)
-(require 'plug/calfw)
-(require 'plug/wanderlust)
+  (require 'plug/env-setup)
+  (require 'plug/linum)
+  (require 'plug/irony)
+  (require 'plug/eclim)
+  (require 'plug/company)
+  (require 'plug/python)
+  (require 'plug/flycheck)
+  (require 'plug/elisp)
+  (require 'plug/column)
+  (require 'plug/magit)
+  (require 'plug/ido)
+  (require 'plug/folding-toggle)
+  (require 'plug/latex)
+  (require 'plug/project-search)
+  (require 'plug/paredit)
+  (require 'plug/guide-key)
+  (require 'plug/calfw)
+  (require 'plug/wanderlust)
 
-(require 'automodes/conf)
-(require 'automodes/sh)
-(require 'automodes/markdown)
+  (require 'automodes/conf)
+  (require 'automodes/sh)
+  (require 'automodes/markdown)
 #+end_src
 
 ** Plugin Scratchpad
 #+begin_src emacs-lisp
 
-;; Minibuffer persistent history
-(savehist-mode 1)
+  ;; Minibuffer persistent history
+  (savehist-mode 1)
 
 
-;; Java
-(add-hook 'java-mode-hook (lambda ()
-                            (setq c-basic-offset 2
-                                  tab-width 2
-                                  indent-tabs-mode nil)))
+  ;; Java
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (setq c-basic-offset 2
+                    tab-width 2
+                    indent-tabs-mode nil)))
 
-;; org mode
-(setq org-log-done 'time)
-(add-hook 'org-mode-hook 'org-indent-mode)
-
-
-
-(use-package aggressive-indent
-  :ensure t
-  :init
-  (global-aggressive-indent-mode 1)
-  :config
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'sh-mode))
-
-(use-package emmet-mode
-  :ensure t
-  :init
-  (progn
-    (add-hook 'sgml-mode-hook 'emmet-mode)
-    (add-hook 'css-mode-hook 'emmet-mode)))
-
-(use-package indent-guide
-  :ensure t
-  :init
-  (indent-guide-global-mode)
-  :config
-  (setq indent-guide-recursive t)
-  (setq indent-guide-threshold 1))
+  ;; org mode
+  (setq org-log-done 'time)
+  (add-hook 'org-mode-hook 'org-indent-mode)
 
 
-;; Rainbow delimiter
-(use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+  (use-package aggressive-indent
+    :ensure t
+    :init
+    (global-aggressive-indent-mode 1)
+    :config
+    (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'sh-mode))
+
+  (use-package emmet-mode
+    :ensure t
+    :init
+    (progn
+      (add-hook 'sgml-mode-hook 'emmet-mode)
+      (add-hook 'css-mode-hook 'emmet-mode)))
+
+  (use-package indent-guide
+    :ensure t
+    :init
+    (indent-guide-global-mode)
+    :config
+    (setq indent-guide-recursive t)
+    (setq indent-guide-threshold 1))
+
+
+  ;; Rainbow delimiter
+  (use-package rainbow-delimiters
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 #+end_src
 
 ** EVIL EVIL EVIL
 #+begin_src emacs-lisp
-;; Emacs evil will use c-u to scroll
-(setq evil-want-C-u-scroll t)
+  ;; Emacs evil will use c-u to scroll
+  (setq evil-want-C-u-scroll t)
 
-(require 'plug/evil)
-(require 'plug/modeline)
+  (require 'plug/evil)
+  (require 'plug/modeline)
 
-;; Undo tree history
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist
-      '(("." . "~/.emacs.d/undo_hist")))
+  ;; Undo tree history
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist
+        '(("." . "~/.emacs.d/undo_hist")))
 #+end_src
