@@ -288,7 +288,7 @@ and sets the mode-line accordingly."
 (advice-add 'evil-visual-block :after
             #'refresh-mode-line)
 
-(add-hook 'window-scroll-functions #'refresh-mode-line)
+;(add-hook 'window-scroll-functions #'refresh-mode-line)
 ;(add-hook 'after-change-major-mode-hook #'refresh-mode-line)
 
 (provide 'my-mode-line)
