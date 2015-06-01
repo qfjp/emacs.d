@@ -34,6 +34,10 @@
 ;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
+(require 'use-package)
+(use-package es
+  :ensure es-lib
+  :ensure es-windows)
 
 (require 'cl-lib)
 (require 'es-lib)
