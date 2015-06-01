@@ -8,14 +8,15 @@ This configuration is designed for emacs 24.5 and above
 
 ** Basic directory structure
 #+BEGIN_SRC text
-└── emacs.d
-    ├── init.el
-    ├── readme.org  # this file
-    └── config
-        ├── automodes
-        ├── keymaps
-        ├── plug
-        └── secure # optional
+  └── emacs.d
+      ├── config
+      │   ├── automodes
+      │   ├── keymaps
+      │   ├── plug
+      │   └── secure # optional
+      ├── init.el
+      ├── readme.org  # this file
+      └── snippets
 #+end_src
 
 * Credits
