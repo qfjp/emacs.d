@@ -114,12 +114,12 @@ Optionally, you can provide more definitions in BINDINGS"
   (setq evil-echo-state nil) ; don't echo the state into the message area
 
   (when global-hl-line-mode
-    (advice-add 'evil-visual-activate-hook :after
-                (lambda (&optional command)
-                  (global-hl-line-mode -1)))
-    (advice-add 'evil-visual-deactivate-hook :after
-                (lambda (&optional command)
-                  (global-hl-line-mode))))
+    (advice-add 'evil-visual-highlight :after
+                (lambda (&optional arg)
+                  "Toggle hl-line mode on entering/exiting visual state."
+                  (if arg
+                      (global-hl-line-mode)
+                    (global-hl-line-mode -1)))))
   (progn
     (setq evil-search-wrap nil)
     (evil/set-key evil-normal-state-map
