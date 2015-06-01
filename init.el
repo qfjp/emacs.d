@@ -1,7 +1,5 @@
-;;; init.el
-
-;; Emacs 24.5+ init.el
-
+;;; init.el --- Emacs 24.5+ init.el
+;;; Commentary:
 ;; The following parses an org file and evaluates its emacs-lisp code blocks.
 ;; This has three main advantages to using org-babel-load-file.
 ;;   1. Explicit control over what blocks get evaluated.
@@ -10,6 +8,8 @@
 ;; Inspired by [[http://endlessparentheses.com/init-org-Without-org-mode.html]["init.org Without org-mode"]]
 
 ;; I decided to name my "init.org" file "readme.org" so it gets displayed by GitHub.
+
+;;; Code:
 
 (defvar init.org-message-depth 3
   "What depth of init.org headings to message at startup.")
@@ -47,3 +47,5 @@
       (goto-char (point-max)))))
   ;; Startup message.
   (message "Don't Panic."))
+(provide 'init)
+;;; init.el ends here
